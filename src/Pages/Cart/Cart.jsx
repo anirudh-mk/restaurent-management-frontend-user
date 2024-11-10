@@ -1,17 +1,42 @@
 import { Box, Button, Divider, Grid2, Typography, styled } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react';
+
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import ProductCard from './ProductCard';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import TabPanel from '../../Components/TabPanel';
 
 function Cart() {
+    const [value, setValue] = useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
     return (
         <Box>
             <Headding sx={{ px: '16px', py: '8px' }}>
                 Cart
             </Headding>
-            <Divider />
-            <Box sx={{ p: '16px' }}>
-                <ProductCard />
+            <Box>
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    variant="fullWidth"
+                >
+                    <Tab label="Cart" />
+                    <Tab label="Status" />
+                </Tabs>
+                <TabPanel value={value} index={0} >
+                    <ProductCard />
+                </TabPanel>
+                <TabPanel value={value} index={1} >
+
+
+
+
+
+                </TabPanel>
             </Box>
             <BottomContainer>
                 <Grid container spacing={1}>
