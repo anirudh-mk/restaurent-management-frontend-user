@@ -1,5 +1,4 @@
 import { Box, Grid2, IconButton, Typography, styled } from '@mui/material'
-import React from 'react'
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';

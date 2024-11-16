@@ -5,9 +5,9 @@ import { Box, Typography } from '@mui/material';
 import styled from 'styled-components';
 import PropTypes from 'prop-types'
 
-function MenuCard({ img, name, rating, isVeg, amount }) {
+function MenuCard({ img, name, rating, isVeg, amount, onClick }) {
     return (
-        <MenuCardContainer>
+        <MenuCardContainer onClick={onClick}>
             <Box
                 sx={{
                     minWidth: '144px',

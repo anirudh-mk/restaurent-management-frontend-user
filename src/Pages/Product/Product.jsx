@@ -17,7 +17,7 @@ function Product() {
                     width: "100vw",
                     height: "100vw",
                     objectFit: "cover",
-                    borderBottomRightRadius: '40px'
+                    borderBottomRightRadius: '40px',
                 }}
             />
             <Container>
@@ -79,6 +79,8 @@ function Product() {
                     </Grid>
                 </Grid>
             </BottomContainer>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam possimus, voluptate est dolores aut aspernatur voluptatum nemo nisi magnam molestias sapiente sint voluptatem cupiditate laborum accusantium aliquam. Nihil, sit.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam possimus, voluptate est dolores aut aspernatur voluptatum nemo nisi magnam molestias sapiente sint voluptatem cupiditate laborum accusantium aliquam. Nihil, sit.
         </Box >
     );
 }
@@ -128,6 +130,7 @@ const BottomContainer = styled(Box)(({ theme }) => ({
     padding: '16px',
     boxShadow: '0 -4px 2px rgba(0, 0, 0, 0.03)',
     borderTopLeftRadius: '16px',
+    backgroundColor: 'white'
 }))
 
 const Grid = styled(Grid2)(({ theme }) => ({
