@@ -81,7 +81,6 @@ function Home() {
                 },
             }}
         >
-            <Puller />
             <Product />
         </Drawer>
     </>
@@ -129,16 +128,3 @@ const MenuContainer = styled(Box)(() => ({
     flexDirection: 'column',
     gap: '16px'
 }))
-
-const Puller = styled('div')(({ theme }) => ({
-    width: 30,
-    height: 6,
-    backgroundColor: grey[300],
-    borderRadius: 3,
-    position: 'absolute',
-    top: 8,
-    left: 'calc(50% - 15px)',
-    ...theme.applyStyles('dark', {
-        backgroundColor: grey[900],
-    }),
-}));
