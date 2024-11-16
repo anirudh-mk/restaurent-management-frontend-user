@@ -24,24 +24,20 @@ function Home() {
         <>
             <Box>
                 <Container sx={{ paddingBottom: 0 }}>
-                    <Headding>Spoon Me</Headding>
-                    <GroupContainer>
-                        <Typography>Kunnamangalam</Typography>
-                        <LocationOnIcon sx={{ color: 'red' }} />
-                    </GroupContainer>
-                </Container>
-                <Box sx={{
-                    position: 'sticky',
-                    top: 0,
-                    backgroundColor: 'white',
-                    paddingTop: '8px',
-                    paddingBottom: '8px',
-                }}>
-                    <Box sx={{ display: 'flex', alignItems: 'center', px: '8px' }}>
-                        <SearchBar />
-                        <LocalMallIcon sx={{ color: 'gray' }} />
+                    <Box>
+                        <Typography variant='h1' sx={{ paddingBottom: '4px' }}>
+                            Spoon Me
+                        </Typography>
+                        <GroupContainer>
+                            <LocationOnIcon sx={{ color: 'red' }} fontSize='small' />
+                            <Typography>Kunnamangalam</Typography>
+                        </GroupContainer>
                     </Box>
-                </Box>
+                    <LocalMallIcon sx={{ color: 'gray' }} />
+                </Container>
+                <SearchBarContainer>
+                    <SearchBar />
+                </SearchBarContainer>
                 <VerticalScrollContainer sx={{ paddingTop: '8px' }}>
                     <FilterCard
                         img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -64,9 +60,9 @@ function Home() {
                         name="Burger"
                     />
                 </VerticalScrollContainer>
-                <Headding sx={{ px: '16px' }}>
+                {/* <Headding sx={{ px: '16px' }}>
                     Popular
-                </Headding>
+                </Headding> */}
                 <VerticalScrollContainer>
                     <PopularCard
                         img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -85,9 +81,9 @@ function Home() {
                         name='Burger'
                     />
                 </VerticalScrollContainer>
-                <Headding sx={{ px: '16px' }}>
+                {/* <Headding sx={{ px: '16px' }}>
                     Menu
-                </Headding>
+                </Headding> */}
                 <MenuContainer>
                     <MenuCard
                         img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -139,18 +135,18 @@ export default Home
 
 const Container = styled(Box)(() => ({
     padding: '16px',
-    paddingTop: '8px',
-    paddingBottom: 0,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center'
 }))
 
-const Headding = styled(Typography)(() => ({
-    fontSize: '22px',
-    fontWeight: 500
+const SearchBarContainer = styled(Box)(() => ({
+    position: 'sticky',
+    top: 0,
+    backgroundColor: 'white',
+    paddingTop: '16px',
+    paddingBottom: '8px',
 }))
-
 const GroupContainer = styled(Box)(() => ({
     display: 'flex',
     gap: '4px',

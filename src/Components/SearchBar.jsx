@@ -13,7 +13,6 @@ function SearchBar() {
                 mx: "8px",
                 display: 'flex',
                 alignItems: 'center',
-                width: '100%'
             }}
             elevation={2}
         >

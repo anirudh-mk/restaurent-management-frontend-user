@@ -1,17 +1,14 @@
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import Home from './Pages/Home/Home'
 import Product from './Pages/Product/Product'
 import Cart from './Pages/Cart/Cart';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
-
-const theme = createTheme();
-
+import BaseTheme from './Theme/BaseTheme';
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={BaseTheme}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
