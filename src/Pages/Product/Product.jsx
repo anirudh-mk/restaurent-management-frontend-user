@@ -1,14 +1,13 @@
-import { Badge, Box, Button, Chip, Grid2, IconButton, Paper, Rating, Stack, Typography, styled } from '@mui/material';
-import React from 'react';
+import { Badge, Box, Button, Chip, Grid2, IconButton, Rating, Typography, styled } from '@mui/material';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
-function Product({ overflow }) {
+function Product() {
     return (
-        <Box sx={{ overflow: overflow ? 'hidden' : 'none' }}>
+        <Box>
             <Box
                 component="img"
                 src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -79,15 +78,15 @@ function Product({ overflow }) {
                     </Grid>
                 </Grid>
             </BottomContainer>
-            {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam possimus, voluptate est dolores aut aspernatur voluptatum nemo nisi magnam molestias sapiente sint voluptatem cupiditate laborum accusantium aliquam. Nihil, sit.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam possimus, voluptate est dolores aut aspernatur voluptatum nemo nisi magnam molestias sapiente sint voluptatem cupiditate laborum accusantium aliquam. Nihil, sit. */}
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam possimus, voluptate est dolores aut aspernatur voluptatum nemo nisi magnam molestias sapiente sint voluptatem cupiditate laborum accusantium aliquam. Nihil, sit.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam possimus, voluptate est dolores aut aspernatur voluptatum nemo nisi magnam molestias sapiente sint voluptatem cupiditate laborum accusantium aliquam. Nihil, sit.
         </Box >
     );
 }
 
 export default Product;
 
-const Container = styled(Box)(({ theme }) => ({
+const Container = styled(Box)(() => ({
     padding: '16px',
     paddingTop: '8px',
     paddingBottom: 0,
@@ -96,18 +95,18 @@ const Container = styled(Box)(({ theme }) => ({
     alignItems: 'center'
 }))
 
-const Headding = styled(Typography)(({ theme }) => ({
+const Headding = styled(Typography)(() => ({
     fontSize: '22px',
     fontWeight: 500
 }))
 
-const GroupContainer = styled(Box)(({ theme }) => ({
+const GroupContainer = styled(Box)(() => ({
     display: 'flex',
     gap: '4px',
     alignItems: 'center'
 }))
 
-const Description = styled(Typography)(({ theme }) => ({
+const Description = styled(Typography)(() => ({
     padding: '16px',
     paddingTop: '8px',
     paddingBottom: '8px',
@@ -117,12 +116,12 @@ const Description = styled(Typography)(({ theme }) => ({
     textOverflow: 'ellipsis'
 }))
 
-const CustomChip = styled(Chip)(({ theme }) => ({
+const CustomChip = styled(Chip)(() => ({
     marginRight: '8px',
     marginBottom: '8px'
 }))
 
-const BottomContainer = styled(Box)(({ theme }) => ({
+const BottomContainer = styled(Box)(() => ({
     position: 'fixed',
     bottom: 0,
     left: 0,
@@ -133,12 +132,12 @@ const BottomContainer = styled(Box)(({ theme }) => ({
     backgroundColor: 'white'
 }))
 
-const Grid = styled(Grid2)(({ theme }) => ({
+const Grid = styled(Grid2)(() => ({
     display: 'flex',
     alignItems: 'center'
 
 }))
 
-const CartButton = styled(Button)(({ theme }) => ({
+const CartButton = styled(Button)(() => ({
     width: '100%'
 }))

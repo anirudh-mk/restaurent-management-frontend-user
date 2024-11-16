@@ -43,22 +43,22 @@ function ProductCard() {
 
 export default ProductCard
 
-const Grid = styled(Grid2)(({ theme }) => ({
+const Grid = styled(Grid2)(() => ({
 
 }))
 
-const Headding = styled(Typography)(({ theme }) => ({
+const Headding = styled(Typography)(() => ({
     fontSize: '22px',
     fontWeight: 500
 }))
 
-const GroupContainer = styled(Box)(({ theme }) => ({
+const GroupContainer = styled(Box)(() => ({
     display: 'flex',
     gap: '4px',
     alignItems: 'center'
 }))
 
-const Container = styled(Box)(({ theme }) => ({
+const Container = styled(Box)(() => ({
     boxShadow: "1px 1px 1px 1px rgba(0, 0, 0, 0.3)",
     borderRadius: 10
 }));

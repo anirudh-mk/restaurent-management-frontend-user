@@ -5,7 +5,7 @@ import { Box, Typography } from '@mui/material';
 import styled from 'styled-components';
 import PropTypes from 'prop-types'
 
-function MenuCard({ img, name, rating, isVeg, amount, onClick }) {
+function MenuCard({ img, name, rating = 0, isVeg = false, amount, onClick }) {
     return (
         <MenuCardContainer onClick={onClick}>
             <Box
@@ -45,17 +45,13 @@ function MenuCard({ img, name, rating, isVeg, amount, onClick }) {
     )
 }
 
-MenuCard.defaultProps = {
-    rating: 0,
-    isVeg: false
-};
-
 MenuCard.propTypes = {
     img: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     isVeg: PropTypes.bool,
     rating: PropTypes.number,
-    amount: PropTypes.number.isRequired
+    amount: PropTypes.number.isRequired,
+    onClick: PropTypes.func
 }
 
 export default MenuCard
