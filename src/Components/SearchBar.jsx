@@ -1,6 +1,5 @@
 import { Search } from '@mui/icons-material';
 import { Paper } from '@mui/material';
-import React from 'react';
 import { InputBase } from '@mui/material';
 import styled from 'styled-components';
 
@@ -26,7 +25,7 @@ function SearchBar() {
 
 export default SearchBar;
 
-const InputField = styled(InputBase)(({ theme }) => ({
+const InputField = styled(InputBase)(() => ({
     flexGrow: 1,
     "& .MuiInputBase-input": {
         border: "none",

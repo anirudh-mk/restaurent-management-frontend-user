@@ -1,10 +1,9 @@
-import { Box, Chip, Divider, Typography, styled } from '@mui/material'
-import React from 'react'
+import { Box, Typography, styled } from '@mui/material'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SearchBar from '../../Components/SearchBar';
-import StarIcon from '@mui/icons-material/Star';
-import AdjustIcon from '@mui/icons-material/Adjust';
-import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import FilterCard from '../../Components/FilterCard';
+import PopularCard from '../../Components/PopularCard';
+import MenuCard from '../../Components/MenuCard';
 
 function Home() {
     return (
@@ -18,184 +17,48 @@ function Home() {
             </Container>
             <SearchBar />
             <VerticalScrollContainer>
-
-                <Box>
-                    <FilterImage
-                        component="img"
-                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt=""
-                    />
-                    <Typography sx={{ textAlign: 'center' }}>
-                        Burger
-                    </Typography>
-                </Box>
-                <Box>
-                    <FilterImage
-                        component="img"
-                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        alt=""
-                    />
-                    <Typography sx={{ textAlign: 'center' }}>
-                        Burger
-                    </Typography>
-                </Box>
-
+                <FilterCard
+                    img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    name="Burger"
+                />
             </VerticalScrollContainer>
             <Headding sx={{ px: '16px' }}>
                 Popular
             </Headding>
             <VerticalScrollContainer>
-                <Box
-                    sx={{
-                        minWidth: '144px',
-                        height: '182px',
-                        borderRadius: '25px',
-                        backgroundImage: 'url(https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        display: 'flex',
-                        alignItems: 'end',
-                        backgroundColor: 'rgba(28, 30, 30, 0.5)',
-                        backgroundBlendMode: 'overlay',
-                        boxShadow: "1px 1px 5px 0 rgba(0, 0, 0, 0.5)",
-                    }}
-                >
-                    <Box sx={{ color: 'white', m: '16px' }}>
-                        <Typography sx={{ fontSize: '20px' }}>Burger</Typography>
-                        <GroupContainer>
-                            <StarIcon sx={{ color: 'yellow' }} />
-                            <Typography>4.5</Typography>
-                        </GroupContainer>
-                    </Box>
-                </Box>
-                <Box
-                    sx={{
-                        minWidth: '144px',
-                        height: '182px',
-                        borderRadius: '25px',
-                        backgroundImage: 'url(https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        display: 'flex',
-                        alignItems: 'end',
-                        backgroundColor: 'rgba(28, 30, 30, 0.5)',
-                        backgroundBlendMode: 'overlay',
-                    }}
-                >
-                    <Box sx={{ color: 'white', m: '16px' }}>
-                        <Typography sx={{ fontSize: '20px' }}>Burger</Typography>
-                        <GroupContainer>
-                            <StarIcon sx={{ color: 'yellow' }} />
-                            <Typography>4.5</Typography>
-                        </GroupContainer>
-                    </Box>
-                </Box><Box
-                    sx={{
-                        minWidth: '144px',
-                        height: '182px',
-                        borderRadius: '25px',
-                        backgroundImage: 'url(https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        display: 'flex',
-                        alignItems: 'end',
-                        backgroundColor: 'rgba(28, 30, 30, 0.5)',
-                        backgroundBlendMode: 'overlay',
-                    }}
-                >
-                    <Box sx={{ color: 'white', m: '16px' }}>
-                        <Typography sx={{ fontSize: '20px' }}>Burger</Typography>
-                        <GroupContainer>
-                            <StarIcon sx={{ color: 'yellow' }} />
-                            <Typography>4.5</Typography>
-                        </GroupContainer>
-                    </Box>
-                </Box>
-                <Box
-                    sx={{
-                        minWidth: '144px',
-                        height: '182px',
-                        borderRadius: '25px',
-                        backgroundImage: 'url(https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        display: 'flex',
-                        alignItems: 'end',
-                        backgroundColor: 'rgba(28, 30, 30, 0.5)',
-                        backgroundBlendMode: 'overlay',
-                    }}
-                >
-                    <Box sx={{ color: 'white', m: '16px' }}>
-                        <Typography sx={{ fontSize: '20px' }}>Burger</Typography>
-                        <GroupContainer>
-                            <StarIcon sx={{ color: 'yellow' }} />
-                            <Typography>4.5</Typography>
-                        </GroupContainer>
-                    </Box>
-                </Box>
-                <Box
-                    sx={{
-                        minWidth: '144px',
-                        height: '182px',
-                        borderRadius: '25px',
-                        backgroundImage: 'url(https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        display: 'flex',
-                        alignItems: 'end',
-                        backgroundColor: 'rgba(28, 30, 30, 0.5)',
-                        backgroundBlendMode: 'overlay',
-
-                    }}
-                >
-                    <Box sx={{ color: 'white', m: '16px' }}>
-                        <Typography sx={{ fontSize: '20px' }}>Burger</Typography>
-                        <GroupContainer>
-                            <StarIcon sx={{ color: 'yellow' }} />
-                            <Typography>4.5</Typography>
-                        </GroupContainer>
-                    </Box>
-                </Box>
+                <PopularCard
+                    img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    name='Burger'
+                />
+                <PopularCard
+                    img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    name='Burger'
+                />
             </VerticalScrollContainer>
             <Headding sx={{ px: '16px' }}>
                 Menu
             </Headding>
             <MenuContainer>
-                <MenuCardContainer>
-                    <Box
-                        sx={{
-                            minWidth: '144px',
-                            height: '120px',
-                            backgroundImage: 'url(https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)',
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center',
-                            borderTopLeftRadius: '16px',
-                            borderTopRightRadius: '16px'
-                        }}
-                    >
-                    </Box>
-                    <Box>
-                        <Container>
-                            <Typography sx={{ fontSize: '20px' }}>Burger</Typography>
-                            <GroupContainer>
-                                <StarIcon sx={{ color: 'yellow' }} />
-                                <Typography>4.5</Typography>
-                            </GroupContainer>
-                        </Container>
-                        <Container sx={{ paddingTop: 0, paddingBottom: '8px' }}>
-                            <GroupContainer>
-                                <AdjustIcon fontSize='small' sx={{ color: 'green' }} />
-                                <Typography>
-                                    Veg
-                                </Typography>
-                            </GroupContainer>
-                            <GroupContainer>
-                                <CurrencyRupeeIcon fontSize='small' />
-                                <Typography>100</Typography>
-                            </GroupContainer>
-                        </Container>
-                    </Box>
-                </MenuCardContainer>
+                <MenuCard
+                    img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    name='Burger'
+                    amount={100}
+                />
+                <MenuCard
+                    img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    name='Burger'
+                    amount={100}
+                />
+                <MenuCard
+                    img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    name='Burger'
+                    amount={100}
+                />
+                <MenuCard
+                    img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    name='Burger'
+                    amount={100}
+                />
             </MenuContainer>
         </Box>
     )
@@ -203,7 +66,7 @@ function Home() {
 
 export default Home
 
-const Container = styled(Box)(({ theme }) => ({
+const Container = styled(Box)(() => ({
     padding: '16px',
     paddingTop: '8px',
     paddingBottom: 0,
@@ -212,19 +75,19 @@ const Container = styled(Box)(({ theme }) => ({
     alignItems: 'center'
 }))
 
-const Headding = styled(Typography)(({ theme }) => ({
+const Headding = styled(Typography)(() => ({
     fontSize: '22px',
     fontWeight: 500
 }))
 
-const GroupContainer = styled(Box)(({ theme }) => ({
+const GroupContainer = styled(Box)(() => ({
     display: 'flex',
     gap: '4px',
     alignItems: 'center'
 
 }))
 
-const VerticalScrollContainer = styled(Box)(({ theme }) => ({
+const VerticalScrollContainer = styled(Box)(() => ({
     padding: '16px',
     display: 'flex',
     gap: '16px',
@@ -235,19 +98,9 @@ const VerticalScrollContainer = styled(Box)(({ theme }) => ({
     }
 }));
 
-const FilterImage = styled(Box)(({ theme }) => ({
-    height: '60px',
-    width: '55px',
-    objectFit: "cover",
-    borderRadius: '12px',
-    boxShadow: "1px 1px 2px 0 rgba(0, 0, 0, 0.5)"
-}))
-
-const MenuContainer = styled(Box)(({ theme }) => ({
+const MenuContainer = styled(Box)(() => ({
     padding: '16px',
-}))
-
-const MenuCardContainer = styled(Box)(({ theme }) => ({
-    boxShadow: "1px 1px 8px 0 rgba(0, 0, 0, 0.5)",
-    borderRadius: '16px'
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px'
 }))

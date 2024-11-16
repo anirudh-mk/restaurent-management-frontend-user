@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Grid2, Typography, styled } from '@mui/material'
+import { Box, Button, Grid2, Typography, styled } from '@mui/material'
 import React, { useState } from 'react';
 
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
@@ -148,22 +148,22 @@ function Cart() {
 
 export default Cart
 
-const Headding = styled(Typography)(({ theme }) => ({
+const Headding = styled(Typography)(() => ({
     fontSize: '22px',
     fontWeight: 500
 }))
 
-const Grid = styled(Grid2)(({ theme }) => ({
+const Grid = styled(Grid2)(() => ({
     display: 'flex',
     alignItems: 'center'
 
 }))
 
-const CheckoutButton = styled(Button)(({ theme }) => ({
+const CheckoutButton = styled(Button)(() => ({
     width: '100%'
 }))
 
-const BottomContainer = styled(Box)(({ theme }) => ({
+const BottomContainer = styled(Box)(() => ({
     position: 'fixed',
     bottom: 0,
     left: 0,
@@ -173,13 +173,7 @@ const BottomContainer = styled(Box)(({ theme }) => ({
     borderTopLeftRadius: '16px',
 }))
 
-const GroupContainer = styled(Box)(({ theme }) => ({
-    display: 'flex',
-    gap: '4px',
-    alignItems: 'center'
-}))
-
-const Card = styled(Box)(({ theme }) => ({
+const GroupContainer = styled(Box)(() => ({
     display: 'flex',
     gap: '4px',
     alignItems: 'center'
