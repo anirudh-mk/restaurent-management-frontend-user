@@ -11,7 +11,8 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       {/* <Product /> */}
-      <Cart />
+      {/* <Cart /> */}
+      <Home />
     </ThemeProvider>
   );
 }

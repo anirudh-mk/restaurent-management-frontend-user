@@ -8,6 +8,7 @@ function SearchBar() {
     return (
         <Paper
             sx={{
+                m: '16px',
                 padding: '2px',
                 paddingLeft: '8px',
                 borderRadius: '16px',
