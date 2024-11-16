@@ -79,8 +79,8 @@ function Product({ overflow }) {
                     </Grid>
                 </Grid>
             </BottomContainer>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam possimus, voluptate est dolores aut aspernatur voluptatum nemo nisi magnam molestias sapiente sint voluptatem cupiditate laborum accusantium aliquam. Nihil, sit.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam possimus, voluptate est dolores aut aspernatur voluptatum nemo nisi magnam molestias sapiente sint voluptatem cupiditate laborum accusantium aliquam. Nihil, sit.
+            {/* Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam possimus, voluptate est dolores aut aspernatur voluptatum nemo nisi magnam molestias sapiente sint voluptatem cupiditate laborum accusantium aliquam. Nihil, sit.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam possimus, voluptate est dolores aut aspernatur voluptatum nemo nisi magnam molestias sapiente sint voluptatem cupiditate laborum accusantium aliquam. Nihil, sit. */}
         </Box >
     );
 }

@@ -1,12 +1,23 @@
-import { Box, Typography, styled } from '@mui/material'
+import { Box, SwipeableDrawer, Typography, styled } from '@mui/material'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SearchBar from '../../Components/SearchBar';
 import FilterCard from '../../Components/FilterCard';
 import PopularCard from '../../Components/PopularCard';
 import MenuCard from '../../Components/MenuCard';
-
+import { grey } from '@mui/material/colors';
+import Product from '../Product/Product'
+import { useState } from 'react';
 function Home() {
+    const [state, setState] = useState({
+        openDrawer: false
+    })
 
+    const toggleDrawer = (state) => () => {
+        setState((prevState) => ({
+            ...prevState,
+            openDrawer: state
+        }));
+    };
     return (
         <>
             <Box>
@@ -60,9 +71,26 @@ function Home() {
                         img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         name='Burger'
                         amount={100}
+                        onClick={() => setState((prevState) => ({ ...prevState, openDrawer: true }))}
                     />
                 </MenuContainer>
             </Box>
+            <SwipeableDrawer
+                anchor='bottom'
+                open={state.openDrawer}
+                onClose={toggleDrawer(false)}
+                onOpen={toggleDrawer(true)}
+                disableSwipeToOpen={false}
+                transitionDuration={500}
+                sx={{
+                    '& .MuiDrawer-paper': {
+                        height: '70vh',
+                    },
+                }}
+            >
+                <Puller />
+                <Product />
+            </SwipeableDrawer>
         </>
 
     )
@@ -108,3 +136,16 @@ const MenuContainer = styled(Box)(() => ({
     flexDirection: 'column',
     gap: '16px'
 }))
+
+const Puller = styled('div')(({ theme }) => ({
+    width: 30,
+    height: 6,
+    backgroundColor: grey[300],
+    borderRadius: 3,
+    position: 'absolute',
+    top: 8,
+    left: 'calc(50% - 15px)',
+    ...theme.applyStyles('dark', {
+        backgroundColor: grey[900],
+    }),
+}));
