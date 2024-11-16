@@ -6,9 +6,9 @@ import LocalMallIcon from '@mui/icons-material/LocalMall';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
-function Product() {
+function Product({ overflow }) {
     return (
-        <Box>
+        <Box sx={{ overflow: overflow ? 'hidden' : 'none' }}>
             <Box
                 component="img"
                 src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

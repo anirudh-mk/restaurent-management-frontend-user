@@ -10,8 +10,39 @@ import { grey } from '@mui/material/colors';
 
 function Home() {
 
+    const [drawerHeight, setDrawerHeight] = useState(70)
     const [state, setState] = useState(false)
-    console.log(state);
+    const [overflow, setOverflow] = useState(false)
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const [isDragging, setIsDragging] = useState(false);
+    const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+    const handleStart = (e) => {
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        setIsDragging(true);
+        setOffset({
+            x: clientX - position.x,
+            y: clientY - position.y,
+        });
+    };
+
+    const handleMove = (e) => {
+        if (!isDragging) return;
+        setOverflow(true)
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        setDrawerHeight(prev => prev += 1)
+        setPosition({
+            x: clientX - offset.x,
+            y: clientY - offset.y,
+        });
+    };
+
+    const handleEnd = () => {
+        setIsDragging(false);
+    };
     return (<>
 
 
@@ -77,11 +108,17 @@ function Home() {
             sx={{
                 '& .MuiDrawer-paper': {
                     borderRadius: '16px',
-                    height: '70vh',
+                    height: `${drawerHeight}vh`,
                 },
             }}
         >
-            <Product />
+            <Puller onMouseDown={handleStart}
+                onMouseMove={handleMove}
+                onMouseUp={handleEnd}
+                onTouchStart={handleStart}
+                onTouchMove={handleMove}
+                onTouchEnd={handleEnd} />
+            <Product overflow={overflow} />
         </Drawer>
     </>
 
@@ -128,3 +165,16 @@ const MenuContainer = styled(Box)(() => ({
     flexDirection: 'column',
     gap: '16px'
 }))
+
+const Puller = styled('div')(({ theme }) => ({
+    width: 30,
+    height: 6,
+    backgroundColor: grey[300],
+    borderRadius: 3,
+    position: 'absolute',
+    top: 8,
+    left: 'calc(50% - 15px)',
+    ...theme.applyStyles('dark', {
+        backgroundColor: grey[900],
+    }),
+}));

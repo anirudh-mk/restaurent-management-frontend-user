@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Home from './Pages/Home/Home'
 import Product from './Pages/Product/Product'
 import Cart from './Pages/Cart/Cart';
+import DraggableComponent from './Pages/Test';
 
 const theme = createTheme();
 
@@ -13,6 +14,7 @@ function App() {
       {/* <Product /> */}
       {/* <Cart /> */}
       <Home />
+      {/* <DraggableComponent /> */}
     </ThemeProvider>
   );
 }
