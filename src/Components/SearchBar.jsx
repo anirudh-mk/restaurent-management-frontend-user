@@ -7,13 +7,13 @@ function SearchBar() {
     return (
         <Paper
             sx={{
-                m: '16px',
                 padding: '2px',
                 paddingLeft: '8px',
                 borderRadius: '16px',
                 mx: "8px",
                 display: 'flex',
-                alignItems: 'center'
+                alignItems: 'center',
+                width: '100%'
             }}
             elevation={2}
         >

@@ -7,6 +7,8 @@ import MenuCard from '../../Components/MenuCard';
 import { grey } from '@mui/material/colors';
 import Product from '../Product/Product'
 import { useState } from 'react';
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+
 function Home() {
     const [state, setState] = useState({
         openDrawer: false
@@ -21,15 +23,42 @@ function Home() {
     return (
         <>
             <Box>
-                <Container>
+                <Container sx={{ paddingBottom: 0 }}>
                     <Headding>Spoon Me</Headding>
                     <GroupContainer>
                         <Typography>Kunnamangalam</Typography>
                         <LocationOnIcon sx={{ color: 'red' }} />
                     </GroupContainer>
                 </Container>
-                <SearchBar />
-                <VerticalScrollContainer>
+                <Box sx={{
+                    position: 'sticky',
+                    top: 0,
+                    backgroundColor: 'white',
+                    paddingTop: '8px',
+                    paddingBottom: '8px',
+                }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', px: '8px' }}>
+                        <SearchBar />
+                        <LocalMallIcon sx={{ color: 'gray' }} />
+                    </Box>
+                </Box>
+                <VerticalScrollContainer sx={{ paddingTop: '8px' }}>
+                    <FilterCard
+                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        name="Burger"
+                    />
+                    <FilterCard
+                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        name="Burger"
+                    />
+                    <FilterCard
+                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        name="Burger"
+                    />
+                    <FilterCard
+                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        name="Burger"
+                    />
                     <FilterCard
                         img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         name="Burger"
@@ -39,6 +68,14 @@ function Home() {
                     Popular
                 </Headding>
                 <VerticalScrollContainer>
+                    <PopularCard
+                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        name='Burger'
+                    />
+                    <PopularCard
+                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        name='Burger'
+                    />
                     <PopularCard
                         img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                         name='Burger'
@@ -85,6 +122,8 @@ function Home() {
                 sx={{
                     '& .MuiDrawer-paper': {
                         height: '70vh',
+                        borderTopRightRadius: '16px',
+                        borderTopLeftRadius: '16px'
                     },
                 }}
             >
