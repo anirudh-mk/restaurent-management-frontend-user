@@ -36,7 +36,8 @@ function Home() {
         rating: [],
         vegOrNon: [],
         amount: [],
-        sortBy: 'popular'
+        sortBy: 'popular',
+        selectedCatogery: []
     })
 
 
@@ -130,14 +131,17 @@ function Home() {
                     <SearchBar />
                 </SearchBarContainer>
                 <VerticalScrollContainer>
-                    <Chip
-                        avatar={<TuneIcon />}
-                        label="Filter"
-                        onClick={() => handleFilterDrawer(true, 0)}
-                        onDelete={() => handleFilterDrawer(true, 0)}
-                        deleteIcon={<ArrowDropDownIcon />}
-                        variant="outlined"
-                    />
+
+                    <Badge badgeContent={20} color="secondary">
+                        <Chip
+                            avatar={<TuneIcon />}
+                            label="Filter"
+                            onClick={() => handleFilterDrawer(true, 0)}
+                            onDelete={() => handleFilterDrawer(true, 0)}
+                            deleteIcon={<ArrowDropDownIcon />}
+                            variant="outlined"
+                        />
+                    </Badge>
                     <Chip
                         label="Sort by"
                         onClick={() => handleFilterDrawer(true, 4)}
@@ -145,6 +149,23 @@ function Home() {
                         deleteIcon={<ArrowDropDownIcon />}
                         variant="outlined"
                     />
+                    {
+                        selectedFilter.selectedCatogery.map((item, index) =>
+                            <Badge key={index}
+                                badgeContent={item.count}
+                                color="secondary"
+                            >
+                                <Chip
+                                    avatar={<TuneIcon />}
+                                    label={item.name}
+                                    onClick={() => handleFilterDrawer(true, 0)}
+                                    onDelete={() => handleFilterDrawer(true, 0)}
+                                    deleteIcon={<ArrowDropDownIcon />}
+                                    variant="outlined"
+                                />
+                            </Badge>
+                        )
+                    }
                 </VerticalScrollContainer>
                 <VerticalScrollContainer sx={{ paddingTop: '8px' }}>
                     <FilterCard
