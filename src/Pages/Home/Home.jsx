@@ -1,4 +1,4 @@
-import { Alert, Badge, Box, Button, Checkbox, Chip, Divider, FormControlLabel, FormGroup, Grid2, IconButton, Radio, RadioGroup, Slider, Snackbar, SwipeableDrawer, Typography, styled } from '@mui/material'
+import { Alert, Badge, Box, Button, Checkbox, Chip, Divider, FormControlLabel, FormGroup, Grid2, IconButton, Radio, RadioGroup, Slider, Snackbar, SwipeableDrawer, Typography, ratingClasses, styled } from '@mui/material'
 import SearchBar from '../../Components/SearchBar';
 import FilterCard from '../../Components/FilterCard';
 import PopularCard from '../../Components/PopularCard';
@@ -31,6 +31,13 @@ function Home() {
         message: '',
         open: false
     })
+    const [selectedFilter, setSelectedFilter] = useState({
+        catogery: [],
+        rating: [],
+        vegOrNon: [],
+        amount: [],
+        sortBy: 'popular'
+    })
 
     const toggleDrawer = (state) => {
         setState((prevState) => ({
@@ -38,6 +45,7 @@ function Home() {
             openDrawer: state
         }));
     };
+
     const handleFilterClick = (name) => {
         setState((prevState) => ({
             ...prevState,
@@ -85,6 +93,13 @@ function Home() {
         }));
     };
 
+    const handleFilterSelection = (e, type) => {
+
+        const { name, value } = e.target
+        console.log('====================================');
+        console.log(name, value);
+        console.log('====================================');
+    }
     const marks = [
         {
             value: 0,
@@ -259,9 +274,15 @@ function Home() {
                     </Tabs>
                     <TabPanel value={state.tabValue} index={0}>
                         <FormGroup>
-                            <FormControlLabel control={<Checkbox />} label="All" />
-                            <FormControlLabel control={<Checkbox />} label="Burger" />
-                            <FormControlLabel control={<Checkbox />} label="Biriyani" />
+                            {FilterOptions.map((item, index) =>
+                                <FormControlLabel
+                                    key={index}
+                                    control={<Checkbox />}
+                                    label={item.title}
+                                    name={item.title}
+                                    onClick={(e) => handleFilterSelection(e, 'catogery')}
+                                />
+                            )}
                         </FormGroup>
                     </TabPanel>
                     <TabPanel value={state.tabValue} index={1}>
