@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 function Product({ food }) {
     const navigation = useNavigate()
     return (
-        <Box>
+        <Box sx={{ paddingBottom: '80px' }}>
             <Box
                 component="img"
                 src={food?.img}
@@ -130,6 +130,7 @@ const BottomContainer = styled(Box)(() => ({
     bottom: 0,
     left: 0,
     right: 0,
+    zIndex: 1300, // Higher than the SwipeableDrawer's zIndex
     padding: '16px',
     boxShadow: '0 -4px 2px rgba(0, 0, 0, 0.03)',
     borderTopLeftRadius: '16px',
