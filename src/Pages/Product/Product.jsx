@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-function Product({ food, toggleDrawer }) {
+function Product({ food, toggleDrawer, setSnackbar }) {
     const navigation = useNavigate()
     const [state, setState] = useState({
         itemCont: 1
@@ -20,10 +20,10 @@ function Product({ food, toggleDrawer }) {
 
             if (action === 'add') {
                 newCount += 1;
-            } else if (action === 'remove' && newCount > 0) {
+            } else if (action === 'remove' && newCount >= 0) {
                 newCount -= 1;
-            } else if (action === 'remove' && newCount === 0) {
-                console.log('Item count is already 0');
+            } else if (action === 'remove' && newCount > 0) {
+                console.log("gggg");
             }
             return {
                 ...prevState,
@@ -31,6 +31,16 @@ function Product({ food, toggleDrawer }) {
             };
         });
     };
+
+    const handleAddToCart = () => {
+        toggleDrawer(false)
+        setSnackbar((prevState) => ({
+            ...prevState,
+            open: true,
+            severity: 'success',
+            message: "Item added to cart"
+        }))
+    }
     return (
         <Box sx={{ paddingBottom: '80px' }}>
             <Box
@@ -88,7 +98,7 @@ function Product({ food, toggleDrawer }) {
                         </IconButton>
                     </Grid>
                     <Grid size={6}>
-                        <CartButton variant="contained" onClick={toggleDrawer(false)}>Add to Cart</CartButton>
+                        <CartButton variant="contained" onClick={handleAddToCart}>Add to Cart</CartButton>
                     </Grid>
                     <Grid size={4}>
                         <GroupContainer>
@@ -124,7 +134,7 @@ function Product({ food, toggleDrawer }) {
 Product.propTypes = {
     food: PropTypes.object,
     toggleDrawer: PropTypes.object,
-
+    setSnackbar: PropTypes.func,
 };
 export default Product;
 

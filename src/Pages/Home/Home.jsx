@@ -1,4 +1,4 @@
-import { Badge, Box, IconButton, SwipeableDrawer, Typography, styled } from '@mui/material'
+import { Alert, Badge, Box, IconButton, Snackbar, SwipeableDrawer, Typography, styled } from '@mui/material'
 import SearchBar from '../../Components/SearchBar';
 import FilterCard from '../../Components/FilterCard';
 import PopularCard from '../../Components/PopularCard';
@@ -15,9 +15,16 @@ function Home() {
     const [state, setState] = useState({
         openDrawer: false,
         filterItem: 'All',
-        food: null
+        food: null,
     })
-    const toggleDrawer = (state) => () => {
+
+    const [snackbar, setSnackbar] = useState({
+        severity: '',
+        message: '',
+        open: false
+    })
+
+    const toggleDrawer = (state) => {
         setState((prevState) => ({
             ...prevState,
             openDrawer: state
@@ -37,6 +44,18 @@ function Home() {
             food: foodObj
         }))
     }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackbar((prevState) => ({
+            ...prevState,
+            open: false,
+        }))
+    };
+
+
     return (
         <>
             <Box>
@@ -100,8 +119,8 @@ function Home() {
             <SwipeableDrawer
                 anchor="bottom"
                 open={state.openDrawer}
-                onClose={toggleDrawer(false)}
-                onOpen={toggleDrawer(true)}
+                onClose={() => toggleDrawer(false)}
+                onOpen={() => toggleDrawer(true)}
                 disableSwipeToOpen={false}
                 transitionDuration={500}
                 sx={{
@@ -120,9 +139,24 @@ function Home() {
                     <Product
                         food={state.food}
                         toggleDrawer={toggleDrawer}
+                        setSnackbar={setSnackbar}
                     />
                 </Box>
             </SwipeableDrawer>
+            <Snackbar
+                open={snackbar.open}
+                autoHideDuration={1000}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                onClose={handleClose}
+            >
+                <Alert
+                    severity={snackbar.severity}
+                    variant="filled"
+                    sx={{ width: '100%' }}
+                >
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
 
         </>
     )
