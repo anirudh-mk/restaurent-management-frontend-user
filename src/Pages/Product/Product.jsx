@@ -75,9 +75,9 @@ function Product({ food, toggleDrawer, setSnackbar }) {
             <Description>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos error quod id, consectetur qui mollitia delectus amet voluptatum voluptates repudiandae repellat iste sequi blanditiis aut ipsa, est optio voluptatibus. Necessitatibus.
             </Description>
-            <Headding sx={{ px: '16px', py: '8px' }}>
-                Ingredients
-            </Headding>
+            <Typography variant='h3' sx={{ px: '16px', py: '8px' }}>
+                Notes
+            </Typography>
             <Box sx={{ px: '16px' }} gap='8px'>
                 <CustomChip label="Salt" variant="outlined" />
                 <CustomChip label="Chilli" variant="outlined" />
@@ -127,6 +127,17 @@ function Product({ food, toggleDrawer, setSnackbar }) {
                     </Grid>
                 </Grid>
             </BottomContainer>
+            <Typography variant='h3' sx={{ px: '16px', py: '8px' }}>
+                Notes
+            </Typography>
+            <Container>
+                <TextField
+                    multiline
+                    rows={4}
+                    sx={{ width: '100%' }}
+                    placeholder='Write your Notes'
+                />
+            </Container>
         </Box >
     );
 }
