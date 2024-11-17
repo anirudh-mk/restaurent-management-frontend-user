@@ -2,7 +2,7 @@ import { Box, Typography, styled } from '@mui/material'
 import StarIcon from '@mui/icons-material/Star';
 import PropTypes from 'prop-types';
 
-function PopularCard({ img, name }) {
+function PopularCard({ img, name, rating = 0 }) {
     return (
         <Box
             sx={{
@@ -22,8 +22,8 @@ function PopularCard({ img, name }) {
             <Box sx={{ color: 'white', m: '16px' }}>
                 <Typography sx={{ fontSize: '20px' }}>{name}</Typography>
                 <GroupContainer>
-                    <StarIcon sx={{ color: 'yellow' }} />
-                    <Typography>4.5</Typography>
+                    <StarIcon sx={{ color: '#FFD600' }} />
+                    <Typography>{rating}</Typography>
                 </GroupContainer>
             </Box>
         </Box>
@@ -33,6 +33,8 @@ function PopularCard({ img, name }) {
 PopularCard.propTypes = {
     img: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    rating: PropTypes.number
+
 };
 
 export default PopularCard

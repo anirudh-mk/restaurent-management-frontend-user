@@ -8,7 +8,7 @@ import { grey } from '@mui/material/colors';
 import Product from '../Product/Product'
 import { useState } from 'react';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import { FilterOptions } from '../../Utils/SupportFunctions';
+import { FilterOptions, PopularFoods, MenuFoods } from '../../Utils/SupportFunctions';
 
 function Home() {
     const [state, setState] = useState({
@@ -56,48 +56,31 @@ function Home() {
                     Popular
                 </Typography>
                 <VerticalScrollContainer>
-                    <PopularCard
-                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        name='Burger'
-                    />
-                    <PopularCard
-                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        name='Burger'
-                    />
-                    <PopularCard
-                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        name='Burger'
-                    />
-                    <PopularCard
-                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        name='Burger'
-                    />
+                    {PopularFoods.map((item, index) =>
+                        <PopularCard
+                            key={index}
+                            img={item.img}
+                            name={item.title}
+                            rating={item.rating}
+                        />
+
+                    )}
+
                 </VerticalScrollContainer>
-                {/* <Headding sx={{ px: '16px' }}>
+                <Typography variant='h2' sx={{ px: '16px' }}>
                     Menu
-                </Headding> */}
+                </Typography>
                 <MenuContainer>
-                    <MenuCard
-                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        name='Burger'
-                        amount={100}
-                    />
-                    <MenuCard
-                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        name='Burger'
-                        amount={100}
-                    />
-                    <MenuCard
-                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        name='Burger'
-                        amount={100}
-                    />
-                    <MenuCard
-                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        name='Burger'
-                        amount={100}
-                        onClick={() => setState((prevState) => ({ ...prevState, openDrawer: true }))}
-                    />
+                    {MenuFoods.map((item, index) =>
+                        <MenuCard
+                            key={index}
+                            img={item.img}
+                            name={item.title}
+                            amount={item.amount}
+                            isVeg={item.isVeg}
+                            rating={item.rating}
+                        />
+                    )}
                 </MenuContainer>
             </Box>
             <SwipeableDrawer

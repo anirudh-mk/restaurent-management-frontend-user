@@ -24,7 +24,7 @@ function MenuCard({ img, name, rating = 0, isVeg = false, amount, onClick }) {
                 <Container>
                     <Typography sx={{ fontSize: '20px' }}>{name}</Typography>
                     <GroupContainer>
-                        <StarIcon sx={{ color: 'yellow' }} />
+                        <StarIcon sx={{ color: '#FFD600' }} />
                         <Typography>{rating}</Typography>
                     </GroupContainer>
                 </Container>
