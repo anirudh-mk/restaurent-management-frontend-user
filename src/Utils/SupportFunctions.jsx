@@ -1,9 +1,5 @@
 const FilterOptions = [
     {
-        title: 'All',
-        img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-    },
-    {
         title: 'Burger',
         img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=999&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     },
@@ -107,4 +103,41 @@ const MenuFoods = [
     },
 ]
 
-export { FilterOptions, PopularFoods, MenuFoods }
+const PriceMarker = [
+    {
+        value: 0,
+        label: '0',
+    },
+    {
+        value: 500,
+        label: '500',
+    },
+    {
+        value: 1000,
+        label: '1000',
+    },
+    {
+        value: 1500,
+        label: '1500',
+    },
+    {
+        value: 2000,
+        label: '2000',
+    },
+];
+
+const RatingFilter = [
+    {
+        label: '4 ★ and Above',
+        name: '4'
+    },
+    {
+        label: '3 ★ and Above',
+        name: '3'
+    },
+    {
+        label: '2 ★ and Above'
+        , name: '2'
+    },
+]
+export { FilterOptions, PopularFoods, MenuFoods, PriceMarker, RatingFilter }

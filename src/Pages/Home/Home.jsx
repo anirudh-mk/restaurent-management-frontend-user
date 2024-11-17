@@ -1,4 +1,4 @@
-import { Alert, Badge, Box, Button, Checkbox, Chip, Divider, FormControlLabel, FormGroup, Grid2, IconButton, Radio, RadioGroup, Slider, Snackbar, SwipeableDrawer, Typography, ratingClasses, styled } from '@mui/material'
+import { Alert, Badge, Box, Button, Checkbox, Chip, Divider, FormControlLabel, FormGroup, Grid2, IconButton, Radio, RadioGroup, Slider, Snackbar, SwipeableDrawer, Typography, styled } from '@mui/material'
 import SearchBar from '../../Components/SearchBar';
 import FilterCard from '../../Components/FilterCard';
 import PopularCard from '../../Components/PopularCard';
@@ -7,7 +7,7 @@ import { grey } from '@mui/material/colors';
 import Product from '../Product/Product'
 import { useState } from 'react';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import { FilterOptions, MenuFoods } from '../../Utils/SupportFunctions';
+import { FilterOptions, MenuFoods, PriceMarker, RatingFilter } from '../../Utils/SupportFunctions';
 import { useNavigate } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -32,13 +32,15 @@ function Home() {
         open: false
     })
     const [selectedFilter, setSelectedFilter] = useState({
-        catogery: [],
+        catogery: ['All'],
         rating: [],
         vegOrNon: [],
         amount: [],
         sortBy: 'popular'
     })
 
+
+    console.log(selectedFilter);
     const toggleDrawer = (state) => {
         setState((prevState) => ({
             ...prevState,
@@ -94,35 +96,23 @@ function Home() {
     };
 
     const handleFilterSelection = (e, type) => {
+        const { name } = e.target
+        if (!selectedFilter[type].includes(name)) {
+            setSelectedFilter((prevState) => ({
+                ...prevState,
+                [type]: [...prevState[type], name]
 
-        const { name, value } = e.target
-        console.log('====================================');
-        console.log(name, value);
-        console.log('====================================');
+            }))
+        }
+        else {
+            setSelectedFilter((prevState) => ({
+                ...prevState,
+                [type]: prevState[type].filter(
+                    item => item !== name
+                )
+            }))
+        }
     }
-    const marks = [
-        {
-            value: 0,
-            label: '0',
-        },
-        {
-            value: 500,
-            label: '500',
-        },
-        {
-            value: 1000,
-            label: '1000',
-        },
-        {
-            value: 1500,
-            label: '1500',
-        },
-        {
-            value: 2000,
-            label: '2000',
-        },
-    ];
-
     return (
         <>
             <Box>
@@ -157,6 +147,12 @@ function Home() {
                     />
                 </VerticalScrollContainer>
                 <VerticalScrollContainer sx={{ paddingTop: '8px' }}>
+                    <FilterCard
+                        img='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=1160&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                        name='All'
+                        onClick={() => handleFilterClick('All')}
+                        selectedItem={state.filterItem}
+                    />
                     {FilterOptions.map((item, index) =>
                         <FilterCard
                             key={index}
@@ -273,11 +269,19 @@ function Home() {
                         <Tab label="Sort" {...a11yProps(4)} />
                     </Tabs>
                     <TabPanel value={state.tabValue} index={0}>
+                        <FormControlLabel
+                            control={<Checkbox checked={selectedFilter.catogery.includes('All')} />}
+                            label='All'
+                            name='All'
+                            onClick={(e) => handleFilterSelection(e, 'catogery')}
+                        />
                         <FormGroup>
                             {FilterOptions.map((item, index) =>
                                 <FormControlLabel
                                     key={index}
-                                    control={<Checkbox />}
+                                    control={
+                                        <Checkbox checked={selectedFilter.catogery.includes(item.title)} />
+                                    }
                                     label={item.title}
                                     name={item.title}
                                     onClick={(e) => handleFilterSelection(e, 'catogery')}
@@ -287,9 +291,17 @@ function Home() {
                     </TabPanel>
                     <TabPanel value={state.tabValue} index={1}>
                         <FormGroup>
-                            <FormControlLabel control={<Checkbox />} label="4 ★ and Above" />
-                            <FormControlLabel control={<Checkbox />} label="3 ★ and Above" />
-                            <FormControlLabel control={<Checkbox />} label="2 ★ and Above" />
+                            {RatingFilter.map((item, index) =>
+                                <FormControlLabel
+                                    key={index}
+                                    control={
+                                        <Checkbox checked={selectedFilter.rating.includes(item.name)} />
+                                    }
+                                    name={item.name}
+                                    label={item.label}
+                                    onClick={(e) => handleFilterSelection(e, 'rating')}
+                                />
+                            )}
                         </FormGroup>
                     </TabPanel>
                     <TabPanel value={state.tabValue} index={2}>
@@ -310,7 +322,7 @@ function Home() {
                                 valueLabelDisplay="auto"
                                 min={0}
                                 max={2000}
-                                marks={marks}
+                                marks={PriceMarker}
                             />
                         </FormGroup>
                     </TabPanel>
