@@ -12,6 +12,8 @@ import { useNavigate } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import TuneIcon from '@mui/icons-material/Tune';
 
 function Home() {
     const navigation = useNavigate()
@@ -20,7 +22,9 @@ function Home() {
         openDrawer: false,
         filterItem: 'All',
         food: null,
-        openFilterDrawer: false
+        openFilterDrawer: false,
+        tabValue: 0,
+        sliderValue: [200, 500]
     })
 
     const [snackbar, setSnackbar] = useState({
@@ -66,16 +70,19 @@ function Home() {
             openFilterDrawer: state
         }))
     }
-    const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
-        setValue(newValue);
+        setState((prevState) => ({
+            ...prevState,
+            tabValue: newValue
+        }))
     };
 
-    const [sliderValue, setSliderValue] = useState([20, 37]);
-
     const handleSliderChange = (event, newValue) => {
-        setSliderValue(newValue);
+        setState((prevState) => ({
+            ...prevState,
+            sliderValue: newValue
+        }));
     };
 
     const marks = [
@@ -84,8 +91,20 @@ function Home() {
             label: '0',
         },
         {
-            value: 5000,
-            label: '5000',
+            value: 500,
+            label: '500',
+        },
+        {
+            value: 1000,
+            label: '1000',
+        },
+        {
+            value: 1500,
+            label: '1500',
+        },
+        {
+            value: 2000,
+            label: '2000',
         },
     ];
 
@@ -107,9 +126,19 @@ function Home() {
                 </SearchBarContainer>
                 <VerticalScrollContainer>
                     <Chip
+                        avatar={<TuneIcon />}
                         label="Filter"
-                        variant='outlined'
                         onClick={() => handleFilterDrawer(true)}
+                        onDelete={() => handleFilterDrawer(true)}
+                        deleteIcon={<ArrowDropDownIcon />}
+                        variant="outlined"
+                    />
+                    <Chip
+                        label="Sort by"
+                        onClick={() => handleFilterDrawer(true)}
+                        onDelete={() => handleFilterDrawer(true)}
+                        deleteIcon={<ArrowDropDownIcon />}
+                        variant="outlined"
                     />
                 </VerticalScrollContainer>
                 <VerticalScrollContainer sx={{ paddingTop: '8px' }}>
@@ -219,7 +248,7 @@ function Home() {
                     <Tabs
                         orientation="vertical"
                         variant="scrollable"
-                        value={value}
+                        value={state.tabValue}
                         onChange={handleChange}
                         aria-label="Vertical tabs example"
                         sx={{ borderRight: 1, borderColor: 'divider' }}
@@ -230,43 +259,43 @@ function Home() {
                         <Tab label="Amount" {...a11yProps(3)} />
                         <Tab label="Sort" {...a11yProps(4)} />
                     </Tabs>
-                    <TabPanel value={value} index={0}>
+                    <TabPanel value={state.tabValue} index={0}>
                         <FormGroup>
                             <FormControlLabel control={<Checkbox />} label="All" />
                             <FormControlLabel control={<Checkbox />} label="Burger" />
                             <FormControlLabel control={<Checkbox />} label="Biriyani" />
                         </FormGroup>
                     </TabPanel>
-                    <TabPanel value={value} index={1}>
+                    <TabPanel value={state.tabValue} index={1}>
                         <FormGroup>
                             <FormControlLabel control={<Checkbox />} label="4 ★ and Above" />
                             <FormControlLabel control={<Checkbox />} label="3 ★ and Above" />
                             <FormControlLabel control={<Checkbox />} label="2 ★ and Above" />
                         </FormGroup>
                     </TabPanel>
-                    <TabPanel value={value} index={2}>
+                    <TabPanel value={state.tabValue} index={2}>
                         <FormGroup>
                             <FormControlLabel control={<Checkbox />} label="Veg" />
                             <FormControlLabel control={<Checkbox />} label="NonVeg" />
                         </FormGroup>
                     </TabPanel>
-                    <TabPanel value={value} index={3}>
+                    <TabPanel value={state.tabValue} index={3}>
                         <FormGroup>
                             <FormControlLabel control={<Checkbox />} label="Under Rs 1000" />
                             <FormControlLabel control={<Checkbox />} label="Rs 1000 to Rs 500" />
                             <FormControlLabel control={<Checkbox />} label="Rs 499 to Rs 0" />
                             <Slider
                                 getAriaLabel={() => 'Temperature range'}
-                                value={sliderValue}
+                                value={state.sliderValue}
                                 onChange={handleSliderChange}
                                 valueLabelDisplay="auto"
                                 min={0}
-                                max={5000}
+                                max={2000}
                                 marks={marks}
                             />
                         </FormGroup>
                     </TabPanel>
-                    <TabPanel value={value} index={4}>
+                    <TabPanel value={state.tabValue} index={4}>
                         <RadioGroup name="use-radio-group" defaultValue="first">
                             <FormControlLabel value="price" control={<Radio />} label="Price" />
                             <FormControlLabel value="rating" control={<Radio />} label="Rating" />
