@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Chip, Grid2, IconButton, Rating, Typography, styled } from '@mui/material';
+import { Badge, Box, Button, Chip, Grid2, IconButton, Rating, TextField, Typography, styled } from '@mui/material';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
@@ -6,9 +6,31 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-function Product({ food }) {
+function Product({ food, toggleDrawer }) {
     const navigation = useNavigate()
+    const [state, setState] = useState({
+        itemCont: 1
+    })
+
+    const handleProductCount = (action) => {
+        setState((prevState) => {
+            let newCount = prevState.itemCont;
+
+            if (action === 'add') {
+                newCount += 1;
+            } else if (action === 'remove' && newCount > 0) {
+                newCount -= 1;
+            } else if (action === 'remove' && newCount === 0) {
+                console.log('Item count is already 0');
+            }
+            return {
+                ...prevState,
+                itemCont: newCount,
+            };
+        });
+    };
     return (
         <Box sx={{ paddingBottom: '80px' }}>
             <Box
@@ -58,7 +80,7 @@ function Product({ food }) {
             </Box>
             <BottomContainer>
                 <Grid container spacing={1}>
-                    <Grid size={2}>
+                    <Grid size={1.8}>
                         <IconButton aria-label="delete" onClick={() => navigation('cart')}>
                             <Badge badgeContent={20} color="secondary">
                                 <LocalMallIcon sx={{ color: 'black' }} />
@@ -66,15 +88,29 @@ function Product({ food }) {
                         </IconButton>
                     </Grid>
                     <Grid size={6}>
-                        <CartButton variant="contained">Add to Cart</CartButton>
+                        <CartButton variant="contained" onClick={toggleDrawer(false)}>Add to Cart</CartButton>
                     </Grid>
                     <Grid size={4}>
                         <GroupContainer>
-                            <IconButton aria-label="delete">
+                            <IconButton aria-label="delete" onClick={() => handleProductCount('remove')}>
                                 <RemoveCircleIcon sx={{ color: 'black' }} />
                             </IconButton>
-                            <Typography>10</Typography>
-                            <IconButton aria-label="delete">
+                            <TextBox
+                                id="outlined-basic"
+                                variant="outlined"
+                                sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        padding: 0,
+                                    },
+                                    '& .MuiInputBase-input': {
+                                        padding: '2px',
+                                        width: '25px',
+                                        textAlign: 'center'
+                                    },
+                                }}
+                                value={state.itemCont}
+                            />
+                            <IconButton aria-label="delete" onClick={() => handleProductCount('add')}>
                                 <AddCircleIcon sx={{ color: 'black' }} />
                             </IconButton>
                         </GroupContainer>
@@ -87,6 +123,8 @@ function Product({ food }) {
 
 Product.propTypes = {
     food: PropTypes.object,
+    toggleDrawer: PropTypes.object,
+
 };
 export default Product;
 
@@ -144,5 +182,9 @@ const Grid = styled(Grid2)(() => ({
 }))
 
 const CartButton = styled(Button)(() => ({
+    width: '100%'
+}))
+
+const TextBox = styled(TextField)(() => ({
     width: '100%'
 }))

@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Grid2, IconButton, SwipeableDrawer, Typography, styled } from '@mui/material'
+import { Badge, Box, IconButton, SwipeableDrawer, Typography, styled } from '@mui/material'
 import SearchBar from '../../Components/SearchBar';
 import FilterCard from '../../Components/FilterCard';
 import PopularCard from '../../Components/PopularCard';
@@ -9,8 +9,6 @@ import { useState } from 'react';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { FilterOptions, MenuFoods } from '../../Utils/SupportFunctions';
 import { useNavigate } from 'react-router-dom';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 function Home() {
     const navigation = useNavigate()
 
@@ -108,7 +106,7 @@ function Home() {
                 transitionDuration={500}
                 sx={{
                     '& .MuiDrawer-paper': {
-                        height: '70vh',
+                        height: '75vh',
                         borderTopRightRadius: '16px',
                         borderTopLeftRadius: '16px',
                         overflow: 'hidden',
@@ -119,33 +117,11 @@ function Home() {
             >
                 <Puller />
                 <Box sx={{ overflowY: 'auto' }}>
-                    <Product food={state.food} />
+                    <Product
+                        food={state.food}
+                        toggleDrawer={toggleDrawer}
+                    />
                 </Box>
-                <BottomContainer>
-                    <Grid container spacing={1}>
-                        <Grid size={2}>
-                            <IconButton aria-label="delete" onClick={() => navigation('cart')}>
-                                <Badge badgeContent={20} color="secondary">
-                                    <LocalMallIcon sx={{ color: 'black' }} />
-                                </Badge>
-                            </IconButton>
-                        </Grid>
-                        <Grid size={6}>
-                            <CartButton variant="contained">Add to Cart</CartButton>
-                        </Grid>
-                        <Grid size={4}>
-                            <GroupContainer>
-                                <IconButton aria-label="delete">
-                                    <RemoveCircleIcon sx={{ color: 'black' }} />
-                                </IconButton>
-                                <Typography>10</Typography>
-                                <IconButton aria-label="delete">
-                                    <AddCircleIcon sx={{ color: 'black' }} />
-                                </IconButton>
-                            </GroupContainer>
-                        </Grid>
-                    </Grid>
-                </BottomContainer>
             </SwipeableDrawer>
 
         </>
@@ -168,7 +144,6 @@ const SearchBarContainer = styled(Box)(() => ({
     paddingTop: '16px',
     paddingBottom: '8px',
 }))
-const Grid = styled(Grid2)(() => ({}))
 const VerticalScrollContainer = styled(Box)(() => ({
     padding: '16px',
     display: 'flex',
@@ -199,24 +174,3 @@ const Puller = styled('div')(({ theme }) => ({
         backgroundColor: grey[900],
     }),
 }));
-
-const BottomContainer = styled(Box)(() => ({
-    position: 'fixed',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    padding: '16px',
-    boxShadow: '0 -4px 2px rgba(0, 0, 0, 0.03)',
-    borderTopLeftRadius: '16px',
-    backgroundColor: 'white'
-}))
-
-const GroupContainer = styled(Box)(() => ({
-    display: 'flex',
-    gap: '4px',
-    alignItems: 'center'
-}))
-
-const CartButton = styled(Button)(() => ({
-    width: '100%'
-}))
