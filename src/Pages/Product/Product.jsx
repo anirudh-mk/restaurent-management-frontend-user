@@ -4,13 +4,19 @@ import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
-function Product() {
+function Product({ food }) {
+    const navigation = useNavigate()
+    console.log('====================================');
+    console.log(food);
+    console.log('====================================');
     return (
         <Box>
             <Box
                 component="img"
-                src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                src={food?.img}
                 alt=""
                 sx={{
                     width: "100vw",
@@ -21,19 +27,19 @@ function Product() {
             />
             <Container>
                 <Headding>
-                    Burger
+                    {food?.title}
                 </Headding>
-                <Rating name="read-only" value={2} readOnly />
+                <Rating name="read-only" value={food?.rating ?? 0} readOnly precision={0.5} />
             </Container>
             <Container>
                 <GroupContainer>
-                    <AdjustIcon fontSize='small' sx={{ color: 'green' }} />
+                    <AdjustIcon fontSize='small' sx={{ color: food?.isVeg ? 'green' : 'red' }} />
                     <Typography>
-                        Veg
+                        {food?.isVeg ? 'Veg' : 'Non Veg'}
                     </Typography>
                 </GroupContainer>
                 <GroupContainer>
-                    <Typography>100</Typography>
+                    <Typography>{food?.amount}</Typography>
                     <CurrencyRupeeIcon fontSize='small' />
                 </GroupContainer>
             </Container>
@@ -56,9 +62,9 @@ function Product() {
             <BottomContainer>
                 <Grid container spacing={1}>
                     <Grid size={2}>
-                        <IconButton aria-label="delete">
+                        <IconButton aria-label="delete" onClick={() => navigation('cart')}>
                             <Badge badgeContent={20} color="secondary">
-                                <LocalMallIcon />
+                                <LocalMallIcon sx={{ color: 'black' }} />
                             </Badge>
                         </IconButton>
                     </Grid>
@@ -68,22 +74,23 @@ function Product() {
                     <Grid size={4}>
                         <GroupContainer>
                             <IconButton aria-label="delete">
-                                <RemoveCircleIcon />
+                                <RemoveCircleIcon sx={{ color: 'black' }} />
                             </IconButton>
                             <Typography>10</Typography>
                             <IconButton aria-label="delete">
-                                <AddCircleIcon />
+                                <AddCircleIcon sx={{ color: 'black' }} />
                             </IconButton>
                         </GroupContainer>
                     </Grid>
                 </Grid>
             </BottomContainer>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam possimus, voluptate est dolores aut aspernatur voluptatum nemo nisi magnam molestias sapiente sint voluptatem cupiditate laborum accusantium aliquam. Nihil, sit.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime nam possimus, voluptate est dolores aut aspernatur voluptatum nemo nisi magnam molestias sapiente sint voluptatem cupiditate laborum accusantium aliquam. Nihil, sit.
         </Box >
     );
 }
 
+Product.propTypes = {
+    food: PropTypes.object,
+};
 export default Product;
 
 const Container = styled(Box)(() => ({

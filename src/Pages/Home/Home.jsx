@@ -8,7 +8,7 @@ import { grey } from '@mui/material/colors';
 import Product from '../Product/Product'
 import { useState } from 'react';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import { FilterOptions, PopularFoods, MenuFoods } from '../../Utils/SupportFunctions';
+import { FilterOptions, MenuFoods } from '../../Utils/SupportFunctions';
 import { useNavigate } from 'react-router-dom';
 
 function Home() {
@@ -16,20 +16,27 @@ function Home() {
 
     const [state, setState] = useState({
         openDrawer: false,
-        filterItem: 'All'
+        filterItem: 'All',
+        food: null
     })
-
     const toggleDrawer = (state) => () => {
         setState((prevState) => ({
             ...prevState,
             openDrawer: state
         }));
     };
-
     const handleFilterClick = (name) => {
         setState((prevState) => ({
             ...prevState,
             filterItem: name
+        }))
+    }
+
+    const handleFoodClick = (openDrawer, foodObj) => {
+        setState((prevState) => ({
+            ...prevState,
+            openDrawer: openDrawer,
+            food: foodObj
         }))
     }
     return (
@@ -63,13 +70,13 @@ function Home() {
                     Popular
                 </Typography>
                 <VerticalScrollContainer>
-                    {PopularFoods.map((item, index) =>
+                    {MenuFoods.map((item, index) =>
                         <PopularCard
                             key={index}
                             img={item.img}
                             name={item.title}
                             rating={item.rating}
-                            onClick={toggleDrawer(true)}
+                            onClick={() => handleFoodClick(true, item)}
                         />
 
                     )}
@@ -108,7 +115,9 @@ function Home() {
                 }}
             >
                 <Puller />
-                <Product />
+                <Product
+                    food={state.food}
+                />
             </SwipeableDrawer>
         </>
 

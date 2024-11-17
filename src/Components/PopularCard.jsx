@@ -36,7 +36,6 @@ PopularCard.propTypes = {
     name: PropTypes.string.isRequired,
     rating: PropTypes.number,
     onClick: PropTypes.func
-
 };
 
 export default PopularCard
