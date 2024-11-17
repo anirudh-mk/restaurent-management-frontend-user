@@ -1,4 +1,4 @@
-import { Box, SwipeableDrawer, Typography, styled } from '@mui/material'
+import { Badge, Box, IconButton, SwipeableDrawer, Typography, styled } from '@mui/material'
 // import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SearchBar from '../../Components/SearchBar';
 import FilterCard from '../../Components/FilterCard';
@@ -9,8 +9,11 @@ import Product from '../Product/Product'
 import { useState } from 'react';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { FilterOptions, PopularFoods, MenuFoods } from '../../Utils/SupportFunctions';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+    const navigation = useNavigate()
+
     const [state, setState] = useState({
         openDrawer: false,
         filterItem: 'All'
@@ -36,7 +39,11 @@ function Home() {
                     <Typography variant='h1' sx={{ paddingBottom: '4px' }}>
                         Spoon Me
                     </Typography>
-                    <LocalMallIcon />
+                    <IconButton aria-label="delete" onClick={() => navigation('cart')}>
+                        <Badge badgeContent={20} color="secondary">
+                            <LocalMallIcon sx={{ color: 'black' }} />
+                        </Badge>
+                    </IconButton>
                 </Container>
                 <SearchBarContainer>
                     <SearchBar />
@@ -62,6 +69,7 @@ function Home() {
                             img={item.img}
                             name={item.title}
                             rating={item.rating}
+                            onClick={toggleDrawer(true)}
                         />
 
                     )}
@@ -79,6 +87,7 @@ function Home() {
                             amount={item.amount}
                             isVeg={item.isVeg}
                             rating={item.rating}
+                            onClick={toggleDrawer(true)}
                         />
                     )}
                 </MenuContainer>
