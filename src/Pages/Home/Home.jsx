@@ -94,7 +94,7 @@ function Home() {
                             amount={item.amount}
                             isVeg={item.isVeg}
                             rating={item.rating}
-                            onClick={toggleDrawer(true)}
+                            onClick={() => handleFoodClick(true, item)}
                         />
                     )}
                 </MenuContainer>

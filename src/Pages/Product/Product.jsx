@@ -9,9 +9,6 @@ import { useNavigate } from 'react-router-dom';
 
 function Product({ food }) {
     const navigation = useNavigate()
-    console.log('====================================');
-    console.log(food);
-    console.log('====================================');
     return (
         <Box>
             <Box

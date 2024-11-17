@@ -3,7 +3,7 @@ import { createTheme } from '@mui/material/styles';
 const BaseTheme = createTheme({
     palette: {
         primary: {
-            main: '#1976d2',
+            main: '#076DFC',
         },
         secondary: {
             main: '#dc004e',
@@ -25,14 +25,14 @@ const BaseTheme = createTheme({
         },
         h2: {
             fontSize: '1.5rem',
-            fontWeight: 500
+            fontWeight: 500,
         },
         p: {
-            fontSize: '12px'
+            fontSize: '12px',
         },
         small: {
-            fontSize: '10px'
-        }
+            fontSize: '10px',
+        },
     },
     components: {
         MuiButton: {
@@ -42,6 +42,14 @@ const BaseTheme = createTheme({
                 },
             },
         },
+        MuiChip: {
+            styleOverrides: {
+                root: ({ theme }) => ({
+                    borderColor: theme.palette.primary.main,
+                }),
+            },
+        },
+
     },
 });
 
