@@ -1,4 +1,4 @@
-import { Alert, Badge, Box, IconButton, Snackbar, SwipeableDrawer, Typography, styled } from '@mui/material'
+import { Alert, Badge, Box, Chip, Divider, IconButton, Snackbar, SwipeableDrawer, Typography, styled } from '@mui/material'
 import SearchBar from '../../Components/SearchBar';
 import FilterCard from '../../Components/FilterCard';
 import PopularCard from '../../Components/PopularCard';
@@ -9,6 +9,7 @@ import { useState } from 'react';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { FilterOptions, MenuFoods } from '../../Utils/SupportFunctions';
 import { useNavigate } from 'react-router-dom';
+
 function Home() {
     const navigation = useNavigate()
 
@@ -16,6 +17,7 @@ function Home() {
         openDrawer: false,
         filterItem: 'All',
         food: null,
+        openFilterDrawer: false
     })
 
     const [snackbar, setSnackbar] = useState({
@@ -55,6 +57,12 @@ function Home() {
         }))
     };
 
+    const handleFilterDrawer = (state) => {
+        setState((prevState) => ({
+            ...prevState,
+            openFilterDrawer: state
+        }))
+    }
 
     return (
         <>
@@ -72,6 +80,13 @@ function Home() {
                 <SearchBarContainer>
                     <SearchBar />
                 </SearchBarContainer>
+                <VerticalScrollContainer>
+                    <Chip
+                        label="Filter"
+                        variant='outlined'
+                        onClick={() => handleFilterDrawer(true)}
+                    />
+                </VerticalScrollContainer>
                 <VerticalScrollContainer sx={{ paddingTop: '8px' }}>
                     {FilterOptions.map((item, index) =>
                         <FilterCard
@@ -142,6 +157,38 @@ function Home() {
                         setSnackbar={setSnackbar}
                     />
                 </Box>
+            </SwipeableDrawer>
+            <SwipeableDrawer
+                anchor="bottom"
+                open={state.openFilterDrawer}
+                onClose={() => handleFilterDrawer(false)}
+                onOpen={() => handleFilterDrawer(true)}
+                disableSwipeToOpen={false}
+                transitionDuration={500}
+                sx={{
+                    '& .MuiDrawer-paper': {
+                        height: '75vh',
+                        borderTopRightRadius: '16px',
+                        borderTopLeftRadius: '16px',
+                        overflow: 'hidden',
+                        display: 'flex',
+                        flexDirection: 'column',
+                    },
+                }}
+            >
+                <Puller />
+                <Typography variant='h3' sx={{ p: '16px' }}>
+                    Filter
+                </Typography>
+                <Divider />
+                <Typography sx={{ px: '16px', pt: '8px' }}>Selected Filters</Typography>
+                <VerticalScrollContainer>
+                    <Chip
+                        label="Filter"
+                        variant='outlined'
+                        onClick={() => handleFilterDrawer(true)}
+                    />
+                </VerticalScrollContainer>
             </SwipeableDrawer>
             <Snackbar
                 open={snackbar.open}
