@@ -37,11 +37,12 @@ function Home() {
         vegOrNon: [],
         amount: [],
         sortBy: 'popular',
-        selectedCatogery: []
+        selectedCatogery: [{
+            name: 'catogery',
+            count: 1
+        }]
     })
 
-
-    console.log(selectedFilter);
     const toggleDrawer = (state) => {
         setState((prevState) => ({
             ...prevState,
@@ -156,7 +157,6 @@ function Home() {
                                 color="secondary"
                             >
                                 <Chip
-                                    avatar={<TuneIcon />}
                                     label={item.name}
                                     onClick={() => handleFilterDrawer(true, 0)}
                                     onDelete={() => handleFilterDrawer(true, 0)}
