@@ -26,7 +26,6 @@ function Home() {
         tabValue: 0,
         sliderValue: [200, 500]
     })
-
     const [snackbar, setSnackbar] = useState({
         severity: '',
         message: '',
@@ -64,10 +63,11 @@ function Home() {
         }))
     };
 
-    const handleFilterDrawer = (state) => {
+    const handleFilterDrawer = (state, tab = 0) => {
         setState((prevState) => ({
             ...prevState,
-            openFilterDrawer: state
+            openFilterDrawer: state,
+            tabValue: tab
         }))
     }
 
@@ -128,15 +128,15 @@ function Home() {
                     <Chip
                         avatar={<TuneIcon />}
                         label="Filter"
-                        onClick={() => handleFilterDrawer(true)}
-                        onDelete={() => handleFilterDrawer(true)}
+                        onClick={() => handleFilterDrawer(true, 0)}
+                        onDelete={() => handleFilterDrawer(true, 0)}
                         deleteIcon={<ArrowDropDownIcon />}
                         variant="outlined"
                     />
                     <Chip
                         label="Sort by"
-                        onClick={() => handleFilterDrawer(true)}
-                        onDelete={() => handleFilterDrawer(true)}
+                        onClick={() => handleFilterDrawer(true, 4)}
+                        onDelete={() => handleFilterDrawer(true, 4)}
                         deleteIcon={<ArrowDropDownIcon />}
                         variant="outlined"
                     />
@@ -234,8 +234,6 @@ function Home() {
                 <Typography variant='h3' sx={{ p: '16px' }}>
                     Filter
                 </Typography>
-                {/* <Divider /> */}
-                {/* <Typography sx={{ px: '16px', pt: '8px' }}>Selected Filters</Typography> */}
                 <VerticalScrollContainer>
                     <Chip
                         label="Filter"
@@ -304,14 +302,14 @@ function Home() {
                 </Box>
                 <Divider />
                 <Box sx={{ p: '16px' }}>
-                    <Grid container spacing={2}>
-                        <Grid item size={6}>
+                    <Grid2 container spacing={2}>
+                        <Grid2 size={6}>
                             <Button variant="outlined" sx={{ width: '100%' }}>Clear all</Button>
-                        </Grid>
-                        <Grid item size={6}>
+                        </Grid2>
+                        <Grid2 size={6}>
                             <Button variant="contained" sx={{ width: '100%' }}>Filter</Button>
-                        </Grid>
-                    </Grid>
+                        </Grid2>
+                    </Grid2>
                 </Box>
             </SwipeableDrawer>
             <Snackbar
@@ -366,7 +364,6 @@ const MenuContainer = styled(Box)(() => ({
     flexDirection: 'column',
     gap: '16px'
 }))
-const Grid = styled(Grid2)(() => ({}))
 
 const Puller = styled('div')(({ theme }) => ({
     width: 30,
@@ -384,7 +381,6 @@ const Puller = styled('div')(({ theme }) => ({
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
     return (
         <div
             role="tabpanel"
@@ -395,7 +391,7 @@ function TabPanel(props) {
         >
             {value === index && (
                 <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                    {children}
                 </Box>
             )}
         </div>
