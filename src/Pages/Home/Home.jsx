@@ -1,5 +1,5 @@
 import { Box, SwipeableDrawer, Typography, styled } from '@mui/material'
-import LocationOnIcon from '@mui/icons-material/LocationOn';
+// import LocationOnIcon from '@mui/icons-material/LocationOn';
 import SearchBar from '../../Components/SearchBar';
 import FilterCard from '../../Components/FilterCard';
 import PopularCard from '../../Components/PopularCard';
@@ -8,10 +8,12 @@ import { grey } from '@mui/material/colors';
 import Product from '../Product/Product'
 import { useState } from 'react';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
+import { FilterOptions } from '../../Utils/SupportFunctions';
 
 function Home() {
     const [state, setState] = useState({
-        openDrawer: false
+        openDrawer: false,
+        filterItem: 'All'
     })
 
     const toggleDrawer = (state) => () => {
@@ -20,49 +22,39 @@ function Home() {
             openDrawer: state
         }));
     };
+
+    const handleFilterClick = (name) => {
+        setState((prevState) => ({
+            ...prevState,
+            filterItem: name
+        }))
+    }
     return (
         <>
             <Box>
                 <Container sx={{ paddingBottom: 0 }}>
-                    <Box>
-                        <Typography variant='h1' sx={{ paddingBottom: '4px' }}>
-                            Spoon Me
-                        </Typography>
-                        <GroupContainer>
-                            <LocationOnIcon sx={{ color: 'red' }} fontSize='small' />
-                            <Typography>Kunnamangalam</Typography>
-                        </GroupContainer>
-                    </Box>
-                    <LocalMallIcon sx={{ color: 'gray' }} />
+                    <Typography variant='h1' sx={{ paddingBottom: '4px' }}>
+                        Spoon Me
+                    </Typography>
+                    <LocalMallIcon />
                 </Container>
                 <SearchBarContainer>
                     <SearchBar />
                 </SearchBarContainer>
                 <VerticalScrollContainer sx={{ paddingTop: '8px' }}>
-                    <FilterCard
-                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        name="Burger"
-                    />
-                    <FilterCard
-                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        name="Burger"
-                    />
-                    <FilterCard
-                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        name="Burger"
-                    />
-                    <FilterCard
-                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        name="Burger"
-                    />
-                    <FilterCard
-                        img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                        name="Burger"
-                    />
+                    {FilterOptions.map((item, index) =>
+                        <FilterCard
+                            key={index}
+                            img={item.img}
+                            name={item.title}
+                            onClick={() => handleFilterClick(item.title)}
+                            selectedItem={state.filterItem}
+                        />
+                    )}
                 </VerticalScrollContainer>
-                {/* <Headding sx={{ px: '16px' }}>
+                <Typography variant='h2' sx={{ px: '16px' }}>
                     Popular
-                </Headding> */}
+                </Typography>
                 <VerticalScrollContainer>
                     <PopularCard
                         img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=699&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -147,17 +139,17 @@ const SearchBarContainer = styled(Box)(() => ({
     paddingTop: '16px',
     paddingBottom: '8px',
 }))
-const GroupContainer = styled(Box)(() => ({
-    display: 'flex',
-    gap: '4px',
-    alignItems: 'center'
+// const GroupContainer = styled(Box)(() => ({
+//     display: 'flex',
+//     gap: '4px',
+//     alignItems: 'center'
 
-}))
+// }))
 
 const VerticalScrollContainer = styled(Box)(() => ({
     padding: '16px',
     display: 'flex',
-    gap: '16px',
+    gap: '12px',
     overflowX: 'scroll',
     scrollbarWidth: 'none', // For Firefox
     '&::-webkit-scrollbar': {

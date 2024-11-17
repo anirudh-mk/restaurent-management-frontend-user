@@ -1,15 +1,15 @@
 import { Box, Typography, styled } from '@mui/material'
 import PropTypes from 'prop-types'
 
-function FilterCard({ img, name }) {
+function FilterCard({ img, name, onClick, selectedItem }) {
     return (
-        <Box>
+        <Box onClick={onClick}>
             <FilterImage
                 component="img"
                 src={img}
                 alt=""
             />
-            <Typography sx={{ textAlign: 'center' }}>
+            <Typography sx={{ textAlign: 'center', color: selectedItem === name ? '#046CFD' : 'gray' }}>
                 {name}
             </Typography>
         </Box>
@@ -21,12 +21,14 @@ export default FilterCard
 FilterCard.propTypes = {
     img: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
+    selectedItem: PropTypes.string.isRequired
 };
 
 
 const FilterImage = styled(Box)(() => ({
-    height: '60px',
-    width: '55px',
+    height: '65px',
+    width: '60px',
     objectFit: "cover",
     borderRadius: '12px',
     // boxShadow: "1px 1px 2px 0 rgba(0, 0, 0, 0.5)"

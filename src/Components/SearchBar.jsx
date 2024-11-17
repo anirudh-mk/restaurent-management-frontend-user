@@ -7,9 +7,9 @@ function SearchBar() {
     return (
         <Paper
             sx={{
-                padding: '2px',
+                padding: '5px',
                 paddingLeft: '8px',
-                borderRadius: '16px',
+                borderRadius: '20px',
                 mx: "8px",
                 display: 'flex',
                 alignItems: 'center',
