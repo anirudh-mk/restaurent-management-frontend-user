@@ -37,10 +37,6 @@ function Home() {
         vegOrNon: [],
         amount: [],
         sortBy: 'popular',
-        selectedCatogery: [{
-            name: 'catogery',
-            count: 1
-        }]
     })
 
     const toggleDrawer = (state) => {
@@ -150,21 +146,33 @@ function Home() {
                         deleteIcon={<ArrowDropDownIcon />}
                         variant="outlined"
                     />
-                    {
-                        selectedFilter.selectedCatogery.map((item, index) =>
-                            <Badge key={index}
-                                badgeContent={item.count}
-                                color="secondary"
-                            >
-                                <Chip
-                                    label={item.name}
-                                    onClick={() => handleFilterDrawer(true, 0)}
-                                    onDelete={() => handleFilterDrawer(true, 0)}
-                                    deleteIcon={<ArrowDropDownIcon />}
-                                    variant="outlined"
-                                />
-                            </Badge>
-                        )
+                    {(selectedFilter.catogery.length > 0) &&
+                        <Badge
+                            badgeContent={selectedFilter.catogery.length}
+                            color="secondary"
+                        >
+                            <Chip
+                                label="Catogery"
+                                onClick={() => handleFilterDrawer(true, 0)}
+                                onDelete={() => handleFilterDrawer(true, 0)}
+                                deleteIcon={<ArrowDropDownIcon />}
+                                variant="outlined"
+                            />
+                        </Badge>
+                    }
+                    {(selectedFilter.rating.length > 0) &&
+                        <Badge
+                            badgeContent={selectedFilter.rating.length}
+                            color="secondary"
+                        >
+                            <Chip
+                                label="Rating"
+                                onClick={() => handleFilterDrawer(true, 1)}
+                                onDelete={() => handleFilterDrawer(true, 1)}
+                                deleteIcon={<ArrowDropDownIcon />}
+                                variant="outlined"
+                            />
+                        </Badge>
                     }
                 </VerticalScrollContainer>
                 <VerticalScrollContainer sx={{ paddingTop: '8px' }}>
@@ -294,7 +302,9 @@ function Home() {
                             control={<Checkbox checked={selectedFilter.catogery.includes('All')} />}
                             label='All'
                             name='All'
-                            onClick={(e) => handleFilterSelection(e, 'catogery')}
+                            onClick={(e) => {
+                                handleFilterSelection(e, 'catogery')
+                            }}
                         />
                         <FormGroup>
                             {FilterOptions.map((item, index) =>
@@ -305,7 +315,9 @@ function Home() {
                                     }
                                     label={item.title}
                                     name={item.title}
-                                    onClick={(e) => handleFilterSelection(e, 'catogery')}
+                                    onClick={(e) => {
+                                        handleFilterSelection(e, 'catogery')
+                                    }}
                                 />
                             )}
                         </FormGroup>
