@@ -7,7 +7,7 @@ import { grey } from '@mui/material/colors';
 import Product from '../Product/Product'
 import { useEffect, useState } from 'react';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
-import { FilterOptions, MenuFoods, PriceMarker, RatingFilter } from '../../Utils/SupportFunctions';
+import { FilterOptions, PriceMarker, RatingFilter } from '../../Utils/SupportFunctions';
 import { useNavigate, useParams } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import TuneIcon from '@mui/icons-material/Tune';
 import { getRestaurantAPI } from '../../apis/restaurant/RestaurantAPIs';
-import { getCatogeryListAPI } from '../../apis/food/foodAPIs';
+import { getCatogeryListAPI, getFoodListAPI, getPopularFoodsListAPI } from '../../apis/food/foodAPIs';
 
 function Home() {
 
@@ -33,7 +33,9 @@ function Home() {
 
     const [response, setResponse] = useState({
         restaurant: null,
-        category: []
+        category: [],
+        popularFoods: [],
+        foods: []
     })
     const [snackbar, setSnackbar] = useState({
         severity: '',
@@ -123,6 +125,26 @@ function Home() {
 
     // ================= API =================
 
+    const foodAPi = async () => {
+        const foodAPiResponse = await getFoodListAPI(restaurant_id)
+        if (foodAPiResponse.statusCode === 200) {
+            setResponse((prevState) => ({
+                ...prevState,
+                foods: foodAPiResponse.response
+            }))
+        }
+    }
+
+    const popularFoodsAPi = async () => {
+        const popularFoodAPiResponse = await getPopularFoodsListAPI(restaurant_id)
+        if (popularFoodAPiResponse.statusCode === 200) {
+            setResponse((prevState) => ({
+                ...prevState,
+                popularFoods: popularFoodAPiResponse.response
+            }))
+        }
+    }
+
     const fetchData = async () => {
         const resturentAPiResponse = await getRestaurantAPI(restaurant_id)
         if (resturentAPiResponse.statusCode === 200) {
@@ -138,7 +160,10 @@ function Home() {
                 category: categoryAPiResponse.response
             }))
         }
+        popularFoodsAPi()
+        foodAPi()
     }
+
     useEffect(() => {
         fetchData()
     }, [])
@@ -229,11 +254,11 @@ function Home() {
                     Popular
                 </Typography>
                 <VerticalScrollContainer>
-                    {MenuFoods.map((item, index) =>
+                    {response.popularFoods.map((item, index) =>
                         <PopularCard
                             key={index}
-                            img={item.img}
-                            name={item.title}
+                            img={item.images[0]}
+                            name={item.name}
                             rating={item.rating}
                             onClick={() => handleFoodClick(true, item)}
                         />
@@ -245,13 +270,13 @@ function Home() {
                     Menu
                 </Typography>
                 <MenuContainer>
-                    {MenuFoods.map((item, index) =>
+                    {response.foods.map((item, index) =>
                         <MenuCard
                             key={index}
-                            img={item.img}
-                            name={item.title}
-                            amount={item.amount}
-                            isVeg={item.isVeg}
+                            img={item.images[0]}
+                            name={item.name}
+                            amount={item.price}
+                            isVeg={item.is_veg}
                             rating={item.rating}
                             onClick={() => handleFoodClick(true, item)}
                         />

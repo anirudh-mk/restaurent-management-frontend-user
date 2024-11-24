@@ -12,7 +12,7 @@ function MenuCard({ img, name, rating = 0, isVeg = false, amount, onClick }) {
                 sx={{
                     minWidth: '144px',
                     height: '120px',
-                    backgroundImage: `url(${img})`,
+                    backgroundImage: `url(http://localhost:8000/media/${img})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     borderTopLeftRadius: '16px',

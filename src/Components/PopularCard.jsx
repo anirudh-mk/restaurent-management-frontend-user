@@ -6,10 +6,10 @@ function PopularCard({ img, name, rating = 0, onClick }) {
     return (
         <Box
             sx={{
-                minWidth: '144px',
+                width: '144px',
                 height: '182px',
                 borderRadius: '25px',
-                backgroundImage: `url(${img})`,
+                backgroundImage: `url(http://localhost:8000/media/${img})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 display: 'flex',

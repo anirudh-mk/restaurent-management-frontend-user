@@ -13,7 +13,6 @@ function Product({ food, toggleDrawer, setSnackbar }) {
     const [state, setState] = useState({
         itemCont: 1
     })
-
     const handleProductCount = (action) => {
         setState((prevState) => {
             let newCount = prevState.itemCont;
@@ -45,7 +44,7 @@ function Product({ food, toggleDrawer, setSnackbar }) {
         <Box sx={{ paddingBottom: '80px' }}>
             <Box
                 component="img"
-                src={food?.img}
+                src={`http://localhost:8000/media/${food?.images[0]}`}
                 alt=""
                 sx={{
                     width: "100vw",
@@ -56,7 +55,7 @@ function Product({ food, toggleDrawer, setSnackbar }) {
             />
             <Container>
                 <Headding>
-                    {food?.title}
+                    {food?.name}
                 </Headding>
                 <Rating name="read-only" value={food?.rating ?? 0} readOnly precision={0.5} />
             </Container>
@@ -64,29 +63,28 @@ function Product({ food, toggleDrawer, setSnackbar }) {
                 <GroupContainer>
                     <AdjustIcon fontSize='small' sx={{ color: food?.isVeg ? 'green' : 'red' }} />
                     <Typography>
-                        {food?.isVeg ? 'Veg' : 'Non Veg'}
+                        {food?.is_veg ? 'Veg' : 'Non Veg'}
                     </Typography>
                 </GroupContainer>
                 <GroupContainer>
-                    <Typography>{food?.amount}</Typography>
+                    <Typography>{food?.price}</Typography>
                     <CurrencyRupeeIcon fontSize='small' />
                 </GroupContainer>
             </Container>
             <Description>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos error quod id, consectetur qui mollitia delectus amet voluptatum voluptates repudiandae repellat iste sequi blanditiis aut ipsa, est optio voluptatibus. Necessitatibus.
+                {food?.description}
             </Description>
             <Typography variant='h3' sx={{ px: '16px', py: '8px' }}>
                 Notes
             </Typography>
             <Box sx={{ px: '16px' }} gap='8px'>
-                <CustomChip label="Salt" variant="outlined" />
-                <CustomChip label="Chilli" variant="outlined" />
-                <CustomChip label="Bun" variant="outlined" />
-                <CustomChip label="Beef" variant="outlined" />
-                <CustomChip label="Salt" variant="outlined" />
-                <CustomChip label="Chilli" variant="outlined" />
-                <CustomChip label="Bun" variant="outlined" />
-                <CustomChip label="Beef" variant="outlined" />
+                {food?.ingredients.map((item, index) =>
+                    <CustomChip
+                        key={index}
+                        label={item}
+                        variant="outlined"
+                    />
+                )}
             </Box>
             <BottomContainer>
                 <Grid container spacing={1}>
