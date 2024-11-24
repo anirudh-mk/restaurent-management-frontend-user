@@ -11,8 +11,8 @@ function App() {
     <ThemeProvider theme={BaseTheme}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/:restaurant_id" element={<Home />} />
+          <Route path="/home/:restaurant_id" element={<Home />} />
           <Route path="/product" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>

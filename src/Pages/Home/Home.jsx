@@ -5,18 +5,22 @@ import PopularCard from '../../Components/PopularCard';
 import MenuCard from '../../Components/MenuCard';
 import { grey } from '@mui/material/colors';
 import Product from '../Product/Product'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { FilterOptions, MenuFoods, PriceMarker, RatingFilter } from '../../Utils/SupportFunctions';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import TuneIcon from '@mui/icons-material/Tune';
+import { getRestaurantAPI } from '../../apis/restaurant/RestaurantAPIs';
+import { getCatogeryListAPI } from '../../apis/food/foodAPIs';
 
 function Home() {
+
     const navigation = useNavigate()
+    const { restaurant_id } = useParams()
 
     const [state, setState] = useState({
         openDrawer: false,
@@ -25,6 +29,11 @@ function Home() {
         openFilterDrawer: false,
         tabValue: 0,
         sliderValue: [200, 500]
+    })
+
+    const [response, setResponse] = useState({
+        restaurant: null,
+        category: []
     })
     const [snackbar, setSnackbar] = useState({
         severity: '',
@@ -111,12 +120,37 @@ function Home() {
             }))
         }
     }
+
+    // ================= API =================
+
+    const fetchData = async () => {
+        const resturentAPiResponse = await getRestaurantAPI(restaurant_id)
+        if (resturentAPiResponse.statusCode === 200) {
+            setResponse((prevState) => ({
+                ...prevState,
+                restaurant: resturentAPiResponse.response
+            }))
+        }
+        const categoryAPiResponse = await getCatogeryListAPI(restaurant_id)
+        console.log(categoryAPiResponse);
+        if (categoryAPiResponse.statusCode === 200) {
+            setResponse((prevState) => ({
+                ...prevState,
+                category: categoryAPiResponse.response
+            }))
+        }
+    }
+    // console.log(response.category);
+    useEffect(() => {
+        fetchData()
+    }, [])
+
     return (
         <>
             <Box>
                 <Container sx={{ paddingBottom: 0 }}>
                     <Typography variant='h1' sx={{ paddingBottom: '4px' }}>
-                        Spoon Me
+                        {response.restaurant?.name}
                     </Typography>
                     <IconButton aria-label="delete" onClick={() => navigation('cart')}>
                         <Badge badgeContent={20} color="secondary">
@@ -181,13 +215,14 @@ function Home() {
                         name='All'
                         onClick={() => handleFilterClick('All')}
                         selectedItem={state.filterItem}
+                        isStatic
                     />
-                    {FilterOptions.map((item, index) =>
+                    {response.category.map((item, index) =>
                         <FilterCard
                             key={index}
-                            img={item.img}
-                            name={item.title}
-                            onClick={() => handleFilterClick(item.title)}
+                            img={item.image}
+                            name={item.name}
+                            onClick={() => handleFilterClick(item.name)}
                             selectedItem={state.filterItem}
                         />
                     )}
