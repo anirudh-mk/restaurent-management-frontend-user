@@ -75,7 +75,7 @@ function Product({ food, toggleDrawer, setSnackbar }) {
                 {food?.description}
             </Description>
             <Typography variant='h3' sx={{ px: '16px', py: '8px' }}>
-                Notes
+                Ingredinets
             </Typography>
             <Box sx={{ px: '16px' }} gap='8px'>
                 {food?.ingredients.map((item, index) =>
@@ -86,7 +86,7 @@ function Product({ food, toggleDrawer, setSnackbar }) {
                     />
                 )}
             </Box>
-            <BottomContainer>
+            {/* <BottomContainer>
                 <Grid container spacing={1}>
                     <Grid size={1.8}>
                         <IconButton aria-label="delete" onClick={() => navigation('cart')}>
@@ -124,8 +124,8 @@ function Product({ food, toggleDrawer, setSnackbar }) {
                         </GroupContainer>
                     </Grid>
                 </Grid>
-            </BottomContainer>
-            <Typography variant='h3' sx={{ px: '16px', py: '8px' }}>
+            </BottomContainer> */}
+            {/* <Typography variant='h3' sx={{ px: '16px', py: '8px' }}>
                 Notes
             </Typography>
             <Container>
@@ -135,7 +135,7 @@ function Product({ food, toggleDrawer, setSnackbar }) {
                     sx={{ width: '100%' }}
                     placeholder='Write your Notes'
                 />
-            </Container>
+            </Container> */}
         </Box >
     );
 }

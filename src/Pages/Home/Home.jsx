@@ -1,4 +1,4 @@
-import { Alert, Badge, Box, Button, Checkbox, Chip, Divider, FormControlLabel, FormGroup, Grid2, IconButton, Radio, RadioGroup, Slider, Snackbar, SwipeableDrawer, Typography, styled } from '@mui/material'
+import { Alert, Badge, Box, Button, Checkbox, Chip, Divider, FormControlLabel, FormGroup, Grid2, Radio, RadioGroup, Slider, Snackbar, SwipeableDrawer, Typography, styled } from '@mui/material'
 import SearchBar from '../../Components/SearchBar';
 import FilterCard from '../../Components/FilterCard';
 import PopularCard from '../../Components/PopularCard';
@@ -6,9 +6,8 @@ import MenuCard from '../../Components/MenuCard';
 import { grey } from '@mui/material/colors';
 import Product from '../Product/Product'
 import { useEffect, useState } from 'react';
-import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { FilterOptions, PriceMarker, RatingFilter } from '../../Utils/SupportFunctions';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import PropTypes from 'prop-types';
@@ -19,7 +18,7 @@ import { getCatogeryListAPI, getFoodListAPI, getPopularFoodsListAPI } from '../.
 
 function Home() {
 
-    const navigation = useNavigate()
+    // const navigation = useNavigate()
     const { restaurant_id } = useParams()
 
     const [state, setState] = useState({
@@ -175,11 +174,11 @@ function Home() {
                     <Typography variant='h1' sx={{ paddingBottom: '4px' }}>
                         {response.restaurant?.name}
                     </Typography>
-                    <IconButton aria-label="delete" onClick={() => navigation('cart')}>
+                    {/* <IconButton aria-label="delete" onClick={() => navigation('cart')}>
                         <Badge badgeContent={20} color="secondary">
                             <LocalMallIcon sx={{ color: 'black' }} />
                         </Badge>
-                    </IconButton>
+                    </IconButton> */}
                 </Container>
                 <SearchBarContainer>
                     <SearchBar />
