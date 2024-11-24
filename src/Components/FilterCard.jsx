@@ -3,16 +3,18 @@ import PropTypes from 'prop-types'
 
 function FilterCard({ img, name, onClick, selectedItem, isStatic }) {
     return (
-        <Box onClick={onClick}>
-            <FilterImage
-                component="img"
-                src={isStatic ? img : `http://localhost:8000${img}`}
-                alt=""
-            />
-            <Typography sx={{ textAlign: 'center', color: selectedItem === name ? '#046CFD' : 'gray' }}>
-                {name}
-            </Typography>
-        </Box>
+        <>
+            <Box onClick={onClick}>
+                <FilterImage
+                    component="img"
+                    src={isStatic ? img : `http://localhost:8000${img}`}
+                    alt=""
+                />
+                <Typography sx={{ textAlign: 'center', color: selectedItem === name ? '#046CFD' : 'gray' }}>
+                    {name}
+                </Typography>
+            </Box>
+        </>
     )
 }
 
@@ -23,7 +25,7 @@ FilterCard.propTypes = {
     name: PropTypes.string.isRequired,
     isStatic: PropTypes.bool,
     onClick: PropTypes.func,
-    selectedItem: PropTypes.string.isRequired
+    selectedItem: PropTypes.string.isRequired,
 };
 
 

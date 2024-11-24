@@ -144,7 +144,7 @@ function Product({ food, toggleDrawer, setSnackbar }) {
 
 Product.propTypes = {
     food: PropTypes.object,
-    toggleDrawer: PropTypes.object,
+    toggleDrawer: PropTypes.func,
     setSnackbar: PropTypes.func,
 };
 export default Product;

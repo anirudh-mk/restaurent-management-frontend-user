@@ -132,7 +132,6 @@ function Home() {
             }))
         }
         const categoryAPiResponse = await getCatogeryListAPI(restaurant_id)
-        console.log(categoryAPiResponse);
         if (categoryAPiResponse.statusCode === 200) {
             setResponse((prevState) => ({
                 ...prevState,
@@ -140,7 +139,6 @@ function Home() {
             }))
         }
     }
-    // console.log(response.category);
     useEffect(() => {
         fetchData()
     }, [])
