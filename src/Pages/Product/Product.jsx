@@ -1,4 +1,4 @@
-import { Badge, Box, Button, Chip, Grid2, IconButton, Rating, TextField, Typography, styled } from '@mui/material';
+import { Badge, Box, Button, Chip, Divider, Grid2, IconButton, Rating, TextField, Typography, styled } from '@mui/material';
 import AdjustIcon from '@mui/icons-material/Adjust';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
@@ -74,7 +74,7 @@ function Product({ food, toggleDrawer, setSnackbar }) {
             <Description>
                 {food?.description}
             </Description>
-            <Typography variant='h3' sx={{ px: '16px', py: '8px' }}>
+            <Typography variant='h3' sx={{ px: '16px', py: '16px' }}>
                 Ingredinets
             </Typography>
             <Box sx={{ px: '16px' }} gap='8px'>
@@ -169,8 +169,8 @@ const GroupContainer = styled(Box)(() => ({
 
 const Description = styled(Typography)(() => ({
     padding: '16px',
-    paddingTop: '8px',
-    paddingBottom: '8px',
+    paddingTop: '16px',
+    paddingBottom: '16px',
     textAlign: 'justify',
     whiteSpace: 'nowrap',
     overflow: 'hidden',
@@ -182,28 +182,28 @@ const CustomChip = styled(Chip)(() => ({
     marginBottom: '8px'
 }))
 
-const BottomContainer = styled(Box)(() => ({
-    position: 'fixed',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 1300, // Higher than the SwipeableDrawer's zIndex
-    padding: '16px',
-    boxShadow: '0 -4px 2px rgba(0, 0, 0, 0.03)',
-    borderTopLeftRadius: '16px',
-    backgroundColor: 'white'
-}))
+// const BottomContainer = styled(Box)(() => ({
+//     position: 'fixed',
+//     bottom: 0,
+//     left: 0,
+//     right: 0,
+//     zIndex: 1300, // Higher than the SwipeableDrawer's zIndex
+//     padding: '16px',
+//     boxShadow: '0 -4px 2px rgba(0, 0, 0, 0.03)',
+//     borderTopLeftRadius: '16px',
+//     backgroundColor: 'white'
+// }))
 
-const Grid = styled(Grid2)(() => ({
-    display: 'flex',
-    alignItems: 'center'
+// const Grid = styled(Grid2)(() => ({
+//     display: 'flex',
+//     alignItems: 'center'
 
-}))
+// }))
 
-const CartButton = styled(Button)(() => ({
-    width: '100%'
-}))
+// const CartButton = styled(Button)(() => ({
+//     width: '100%'
+// }))
 
-const TextBox = styled(TextField)(() => ({
-    width: '100%'
-}))
+// const TextBox = styled(TextField)(() => ({
+//     width: '100%'
+// }))
