@@ -136,8 +136,40 @@ const RatingFilter = [
         name: '3'
     },
     {
-        label: '2 ★ and Above'
-        , name: '2'
+        label: '2 ★ and Above',
+        name: '2'
     },
 ]
-export { FilterOptions, PopularFoods, MenuFoods, PriceMarker, RatingFilter }
+
+const PriceFilter = [
+    {
+        label: 'Above Rs 1000',
+        value: 1000
+    },
+    {
+        label: 'Rs 999 to Rs 500',
+        value: [500, 999]
+    },
+    {
+        label: 'Rs 499 to Rs 0',
+        value: [0, 499]
+    },
+]
+
+const SortBy = [
+    {
+        name: 'Name',
+        value: '-name'
+    },
+    {
+        name: 'Rating',
+        value: '-rating'
+    },
+    {
+        name: 'Price',
+        value: '-price'
+    }
+
+
+]
+export { FilterOptions, PopularFoods, MenuFoods, PriceMarker, RatingFilter, PriceFilter, SortBy }

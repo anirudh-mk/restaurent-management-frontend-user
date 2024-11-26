@@ -6,7 +6,7 @@ import MenuCard from '../../Components/MenuCard';
 import { grey } from '@mui/material/colors';
 import Product from '../Product/Product'
 import { useEffect, useState } from 'react';
-import { FilterOptions, PriceMarker, RatingFilter } from '../../Utils/SupportFunctions';
+import { FilterOptions, PriceFilter, PriceMarker, RatingFilter, SortBy } from '../../Utils/SupportFunctions';
 import { useParams } from 'react-router-dom';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -27,7 +27,8 @@ function Home() {
         food: null,
         openFilterDrawer: false,
         tabValue: 0,
-        sliderValue: [200, 500]
+        sliderValue: [200, 500],
+        search: ''
     })
 
     const [response, setResponse] = useState({
@@ -36,19 +37,20 @@ function Home() {
         popularFoods: [],
         foods: []
     })
+
     const [snackbar, setSnackbar] = useState({
         severity: '',
         message: '',
         open: false
     })
     const [selectedFilter, setSelectedFilter] = useState({
-        catogery: ['All'],
+        isAllCategory: false,
+        category: [],
         rating: [],
         vegOrNon: [],
         amount: [],
-        sortBy: 'popular',
+        sortBy: '-rating',
     })
-
     const toggleDrawer = (state) => {
         setState((prevState) => ({
             ...prevState,
@@ -101,35 +103,116 @@ function Home() {
             ...prevState,
             sliderValue: newValue
         }));
+
+        setSelectedFilter((prevState) => ({
+            ...prevState,
+            amount: newValue
+        }))
     };
 
     const handleFilterSelection = (e, type) => {
-        const { name } = e.target
-        if (!selectedFilter[type].includes(name)) {
+        const { value } = e.target
+
+        if (type == 'amount') {
+            const { value } = e.target;
+            const parsedValue = JSON.parse(value);
+
+            let category_length = selectedFilter.category.length;
+            let total_category = response.category.length;
+
+            setState((prevState) => ({
+                ...prevState,
+                sliderValue: [0, 100]
+            }));
+
+            if (!selectedFilter[type].some(item => JSON.stringify(item) === JSON.stringify(parsedValue))) {
+                category_length += 1;
+                setSelectedFilter((prevState) => ({
+                    ...prevState,
+                    [type]: [...prevState[type], parsedValue],
+                    isAllCategory: total_category === category_length ? true : false
+                }));
+            } else {
+                setSelectedFilter((prevState) => ({
+                    ...prevState,
+                    [type]: prevState[type].filter(
+                        item => JSON.stringify(item) !== JSON.stringify(parsedValue)
+                    ),
+                    isAllCategory: false
+                }));
+            }
+        }
+        else {
+            let category_length = selectedFilter.category.length
+            let total_category = response.category.length
+
+            if (!selectedFilter[type].includes(value)) {
+                category_length += 1
+                setSelectedFilter((prevState) => ({
+                    ...prevState,
+                    [type]: [...prevState[type], value],
+                    isAllCategory: total_category === category_length ? true : false
+                }))
+            }
+            else {
+                setSelectedFilter((prevState) => ({
+                    ...prevState,
+                    [type]: prevState[type].filter(
+                        item => item !== value
+                    ),
+                    isAllCategory: false
+                }))
+            }
+        }
+    }
+
+    const containsItem = (list, item) => {
+        return list.some(element => {
+            if (Array.isArray(element) && Array.isArray(item)) {
+                return JSON.stringify(element) === JSON.stringify(item);
+            }
+            return element === item;
+        });
+    };
+
+    const handleSelectAllCategory = () => {
+        if (!selectedFilter.isAllCategory) {
             setSelectedFilter((prevState) => ({
                 ...prevState,
-                [type]: [...prevState[type], name]
-
+                category: response.category.map(item => item.id),
+                isAllCategory: true
             }))
         }
         else {
             setSelectedFilter((prevState) => ({
                 ...prevState,
-                [type]: prevState[type].filter(
-                    item => item !== name
-                )
+                category: [],
+                isAllCategory: false
             }))
         }
     }
-
+    const handleSearch = (e) => {
+        const { value } = e.target
+        setState((prevState) => ({
+            ...prevState,
+            search: value
+        }))
+    }
     // ================= API =================
 
     const foodAPi = async () => {
-        const foodAPiResponse = await getFoodListAPI(restaurant_id)
+        const foodAPiResponse = await getFoodListAPI(
+            restaurant_id,
+            state.search,
+            selectedFilter.sortBy,
+            selectedFilter.category.filter(item => item !== 'All'),
+            selectedFilter.rating,
+            selectedFilter.amount
+        )
         if (foodAPiResponse.statusCode === 200) {
             setResponse((prevState) => ({
                 ...prevState,
-                foods: foodAPiResponse.response
+                foods: foodAPiResponse.response.data
             }))
         }
     }
@@ -143,7 +226,11 @@ function Home() {
             }))
         }
     }
-
+    const handleFilter = () => {
+        foodAPi()
+        popularFoodsAPi()
+        handleFilterDrawer(false)
+    }
     const fetchData = async () => {
         const resturentAPiResponse = await getRestaurantAPI(restaurant_id)
         if (resturentAPiResponse.statusCode === 200) {
@@ -167,6 +254,9 @@ function Home() {
         fetchData()
     }, [])
 
+    useEffect(() => {
+        foodAPi()
+    }, [state.search])
     return (
         <>
             <Box>
@@ -181,7 +271,7 @@ function Home() {
                     </IconButton> */}
                 </Container>
                 <SearchBarContainer>
-                    <SearchBar />
+                    <SearchBar onChange={(e) => handleSearch(e)} />
                 </SearchBarContainer>
                 <VerticalScrollContainer>
 
@@ -202,9 +292,9 @@ function Home() {
                         deleteIcon={<ArrowDropDownIcon />}
                         variant="outlined"
                     />
-                    {(selectedFilter.catogery.length > 0) &&
+                    {(selectedFilter.category.length > 0) &&
                         <Badge
-                            badgeContent={selectedFilter.catogery.length}
+                            badgeContent={selectedFilter.category.length}
                             color="secondary"
                         >
                             <Chip
@@ -356,24 +446,23 @@ function Home() {
                     </Tabs>
                     <TabPanel value={state.tabValue} index={0}>
                         <FormControlLabel
-                            control={<Checkbox checked={selectedFilter.catogery.includes('All')} />}
+                            control={<Checkbox checked={selectedFilter.isAllCategory} />}
                             label='All'
-                            name='All'
-                            onClick={(e) => {
-                                handleFilterSelection(e, 'catogery')
+                            onClick={() => {
+                                handleSelectAllCategory()
                             }}
                         />
                         <FormGroup>
-                            {FilterOptions.map((item, index) =>
+                            {response.category.map((item, index) =>
                                 <FormControlLabel
                                     key={index}
                                     control={
-                                        <Checkbox checked={selectedFilter.catogery.includes(item.title)} />
+                                        <Checkbox checked={selectedFilter.category.includes(item.id)} />
                                     }
-                                    label={item.title}
-                                    name={item.title}
+                                    label={item.name}
+                                    value={item.id}
                                     onClick={(e) => {
-                                        handleFilterSelection(e, 'catogery')
+                                        handleFilterSelection(e, 'category')
                                     }}
                                 />
                             )}
@@ -387,7 +476,7 @@ function Home() {
                                     control={
                                         <Checkbox checked={selectedFilter.rating.includes(item.name)} />
                                     }
-                                    name={item.name}
+                                    value={item.name}
                                     label={item.label}
                                     onClick={(e) => handleFilterSelection(e, 'rating')}
                                 />
@@ -402,11 +491,20 @@ function Home() {
                     </TabPanel>
                     <TabPanel value={state.tabValue} index={3}>
                         <FormGroup>
-                            <FormControlLabel control={<Checkbox />} label="Under Rs 1000" />
-                            <FormControlLabel control={<Checkbox />} label="Rs 1000 to Rs 500" />
-                            <FormControlLabel control={<Checkbox />} label="Rs 499 to Rs 0" />
+                            {PriceFilter.map((item, index) =>
+                                <FormControlLabel
+                                    key={index}
+                                    control={
+                                        <Checkbox checked={containsItem(selectedFilter.amount, item.value)} />
+                                    }
+                                    label={item.label}
+                                    value={JSON.stringify(item.value)}
+                                    onClick={(e) => handleFilterSelection(e, 'amount')}
+                                />
+
+                            )}
                             <Slider
-                                getAriaLabel={() => 'Temperature range'}
+                                // getAriaLabel={() => 'Temperature range'}
                                 value={state.sliderValue}
                                 onChange={handleSliderChange}
                                 valueLabelDisplay="auto"
@@ -418,8 +516,14 @@ function Home() {
                     </TabPanel>
                     <TabPanel value={state.tabValue} index={4}>
                         <RadioGroup name="use-radio-group" defaultValue="first">
-                            <FormControlLabel value="price" control={<Radio />} label="Price" />
-                            <FormControlLabel value="rating" control={<Radio />} label="Rating" />
+                            {SortBy.map((item, index) =>
+                                <FormControlLabel
+                                    key={index}
+                                    value={item.value}
+                                    control={<Radio />}
+                                    label={item.name}
+                                />
+                            )}
                         </RadioGroup>
                     </TabPanel>
                 </Box>
@@ -430,7 +534,7 @@ function Home() {
                             <Button variant="outlined" sx={{ width: '100%' }}>Clear all</Button>
                         </Grid2>
                         <Grid2 size={6}>
-                            <Button variant="contained" sx={{ width: '100%' }}>Filter</Button>
+                            <Button variant="contained" sx={{ width: '100%' }} onClick={handleFilter}>Filter</Button>
                         </Grid2>
                     </Grid2>
                 </Box>

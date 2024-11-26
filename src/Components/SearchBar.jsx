@@ -2,8 +2,11 @@ import { Search } from '@mui/icons-material';
 import { Paper } from '@mui/material';
 import { InputBase } from '@mui/material';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-function SearchBar() {
+function SearchBar({ onChange }) {
+
+
     return (
         <Paper
             sx={{
@@ -17,10 +20,14 @@ function SearchBar() {
             elevation={2}
         >
             <Search />
-            <InputField placeholder="Search..." />
+            <InputField placeholder="Search..." onChange={onChange} />
         </Paper>
     );
 }
+
+SearchBar.propTypes = {
+    onChange: PropTypes.func,
+}; 0
 
 export default SearchBar;
 

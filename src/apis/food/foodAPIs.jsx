@@ -1,8 +1,17 @@
 import axios from 'axios';
 
-const getFoodListAPI = async function (restauarnt_id) {
+const getFoodListAPI = async function (restauarnt_id, search, sortBy, category, rating, price) {
+    const base_url = `http://localhost:8000/api/v1/food/list/${restauarnt_id}/`
+    const params = new URLSearchParams();
+
+    if (search) params.append('search', search);
+    if (sortBy) params.append('sortBy', sortBy);
+    if (category && category.length > 0) params.append('category', JSON.stringify(category));
+    if (rating && rating.length > 0) params.append('rating', JSON.stringify(rating));
+    if (price && price.length > 0) params.append('price', JSON.stringify(price));
+
     try {
-        const response = await axios.get(`http://localhost:8000/api/v1/food/list/${restauarnt_id}/`);
+        const response = await axios.get(`${base_url}?${params.toString()}`);
         return response.data
     } catch (error) {
         return error
